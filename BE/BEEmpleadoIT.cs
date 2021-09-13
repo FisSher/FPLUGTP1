@@ -11,7 +11,7 @@ namespace BE
 
         public override double Calcular_Salario()
         {
-            return SalarioBase * 1.25;
+            return SalarioBase * 1.25 + Antiguedad;
         }
     }
 }

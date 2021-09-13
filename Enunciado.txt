@@ -1,0 +1,17 @@
+Se quiere hacer un sistema de gestión de recursos humanos de los empleados de la empresa de servicios médicos.
+Principalmente se pide poder gestionar un empleado, sucursal y los puestos que ocupan.
+
+Del empleado se conocen: Nombre, apellido, DNI, Puesto, Salario, Sucursal asignada, fecha ingreso, antiguedad y si está todavía
+trabajando en la compañía o no, de no estar mas, se conoce su fecha de baja.
+
+El salario de los empleados de IT reciben una bonificacion de 0.25 + antiguedad por guardias pasivas.
+
+La sucursal posee una lista de empleados y los empleados pueden tener mas de una sucursal asignada (trabajos medio tiempo o de soporte).
+
+Los puestos de trabajo se manejan en una tabla aparte para evitar múltiples nombres para un mismo puesto.
+
+Se requiere el ABM de todas las clases y que los cambios persistan en una base de datos. 
+Para mantener el seguimiento de los recursos, la baja de los empleados es lógica.
+
+
+
