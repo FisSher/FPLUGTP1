@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public abstract class BEEmpleado:BEEntidad
+    public abstract class BEEmpleado:Entidad
     {
         #region props
         public string Nombre { get; set; }

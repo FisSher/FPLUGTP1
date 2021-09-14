@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{77D2E5ED-1C26-44CE-A864-13350911BD4C}</ProjectGuid>
+    <ProjectGuid>{2B539871-4407-4186-8B80-A9AA59C32C4F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BE</RootNamespace>
-    <AssemblyName>BE</AssemblyName>
+    <RootNamespace>Negocio</RootNamespace>
+    <AssemblyName>Negocio</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,18 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BEEmpleado.cs" />
-    <Compile Include="BEEmpleadoIT.cs" />
-    <Compile Include="BEEmpleadoMedico.cs" />
-    <Compile Include="Entidad.cs" />
+    <Compile Include="BLLEmpleadoIT.cs" />
+    <Compile Include="BLLEmpleadoMedico.cs" />
+    <Compile Include="BLLPuesto.cs" />
+    <Compile Include="BLLSucursal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BEPuesto.cs" />
-    <Compile Include="BESucursal.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abstraccion\Abstraccion.csproj">
       <Project>{8dd55739-cae5-46ed-86d7-2a8f6adb0559}</Project>
       <Name>Abstraccion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BE\BE.csproj">
+      <Project>{77d2e5ed-1c26-44ce-a864-13350911bd4c}</Project>
+      <Name>BE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapper\Mapper.csproj">
+      <Project>{83c0d992-6036-4164-80f3-7d67a98069fc}</Project>
+      <Name>Mapper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

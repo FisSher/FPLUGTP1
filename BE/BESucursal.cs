@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class BESucursal: BEEntidad
+    public class BESucursal: Entidad
     {
         public List<BEEmpleado> ListaEmplados { get; set; }
         public List<BEPuesto> ListaPuestos { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class BEEntidad : IEntidad
+    public class Entidad : IEntidad
     {
         public int Codigo { get ; set ; }
     }

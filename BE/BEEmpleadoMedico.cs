@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class BEPuesto:Entidad
+    public class BEEmpleadoMedico:BEEmpleado
     {
-        public String Nombre { get; set; }
-
-        public override string ToString()
+        public override double Calcular_Salario()
         {
-            return Codigo + Nombre;
+            return SalarioBase * 1.50 + Antiguedad;
         }
-
-
     }
 }
