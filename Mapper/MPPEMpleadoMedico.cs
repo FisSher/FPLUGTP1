@@ -8,7 +8,7 @@ using BE;
 
 namespace Mapper
 {
-    public class MPPEMpleadoMedico : IGestor<BEEmpleadoMedico>
+    public class MPPEmpleadoMedico : IGestor<BEEmpleadoMedico>
     {
         public bool Baja(BEEmpleadoMedico Objeto)
         {
