@@ -7,7 +7,7 @@ trabajando en la compañía o no, de no estar mas, se conoce su fecha de baja.
 El salario de los empleados de IT reciben una bonificacion de 0.25 + antiguedad por guardias pasivas.
 El salario de los empleados médicos reciben una bonificacion de 0.50 + antiguedad por guardias nocturnas.
 
-La sucursal posee una lista de empleados y los empleados pueden tener mas de una sucursal asignada (trabajos medio tiempo o de soporte).
+La sucursal posee una lista de empleados y localidad. Los empleados pueden tener mas de una sucursal asignada (trabajos medio tiempo o de soporte).
 
 Los puestos de trabajo se manejan en una tabla aparte para evitar múltiples nombres para un mismo puesto.
 

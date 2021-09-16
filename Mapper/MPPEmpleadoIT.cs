@@ -25,6 +25,11 @@ namespace Mapper
             throw new NotImplementedException();
         }
 
+        public BEEmpleadoIT ListarObjeto(BEEmpleadoIT Objeto)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<BEEmpleadoIT> ListarTodo()
         {
             throw new NotImplementedException();

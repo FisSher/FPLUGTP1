@@ -7,7 +7,9 @@ namespace DAL
 {
     public class Acceso
     {
-        private SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["MiCadenaDeConexion"].ToString());
+        //private readonly SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["MiCadenaDeConexion"].ToString());
+
+        private readonly SqlConnection sqlConnection = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=FPLUG;Integrated Security=True");
 
         //Voy a ver si le doy uso, de ultima lo borro
         public string PruebaConexion()
@@ -66,30 +68,55 @@ namespace DAL
             return dataSet;
         }
 
+        //Tengo que hacer acá el transaction
         public bool Escribir(string Consulta_SQL)
         {
-
             sqlConnection.Open();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.Connection = sqlConnection;
-            cmd.CommandText = Consulta_SQL;
+            SqlTransaction sqlTransaction;
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlTransaction = sqlConnection.BeginTransaction();
+
             try
             {
-                int respuesta = cmd.ExecuteNonQuery();
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = Consulta_SQL;
+                sqlCommand.Transaction = sqlTransaction;
+                sqlCommand.ExecuteNonQuery(); //Ejecuta->
+                sqlTransaction.Commit();
                 return true;
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-                throw;
+                sqlTransaction.Rollback();
+                throw ex;
             }
-
+            catch (Exception ex)
+            {
+                sqlTransaction.Rollback();
+                throw ex; 
+            }
             finally
             { sqlConnection.Close(); }
         }
 
-        //Todavia no se si quiero leer escalar, no creo
-
-
+        //Tengo que leer escalar para el tema base
+        public bool LeerEscalar(string consulta)
+        {
+            sqlConnection.Open();
+            SqlCommand cmd = new SqlCommand(consulta, sqlConnection);
+            cmd.CommandType = CommandType.Text;
+            try
+            {
+                int Respuesta = Convert.ToInt32(cmd.ExecuteScalar());
+                sqlConnection.Close();
+                if (Respuesta > 0)
+                { return true; }
+                else
+                { return false; }
+            }
+            catch (SqlException)
+            { throw; }
+        }
     }
 }

@@ -11,7 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17E39497-9227-4ECF-9D1C-45974969CE79}"
 	ProjectSection(SolutionItems) = preProject
+		DER.png = DER.png
+		Diagrama Clases.png = Diagrama Clases.png
 		Enunciado.txt = Enunciado.txt
+		FPLUG.bak = FPLUG.bak
+		Script.sql = Script.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapper", "Mapper\Mapper.csproj", "{83C0D992-6036-4164-80F3-7D67A98069FC}"

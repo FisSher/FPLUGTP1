@@ -9,7 +9,8 @@ namespace BE
     public class BESucursal: Entidad
     {
         public List<BEEmpleado> ListaEmplados { get; set; }
-        public List<BEPuesto> ListaPuestos { get; set; }
+
+        public BELocalidad Localidad { get; set; }
 
     }
 }

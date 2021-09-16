@@ -33,6 +33,11 @@ namespace Negocio
             return mPPPuesto.Guardar(oBEPuesto);
         }
 
+        public BEPuesto ListarObjeto(BEPuesto Objeto)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<BEPuesto> ListarTodo()
         {
             return mPPPuesto.ListarTodo();

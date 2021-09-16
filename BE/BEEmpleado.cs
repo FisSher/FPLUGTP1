@@ -15,7 +15,6 @@ namespace BE
         public int Puesto { get; set; }
         public double SalarioBase { get; set; }
         public int Baja { get; set; }
-        public List<BESucursal> SucursalesAsignadas { get; set; }
         public DateTime FechaIngreso { get; set; }
         public DateTime FechaEgreso { get; set; }
         public int Antiguedad { get; set; }

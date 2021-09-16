@@ -34,6 +34,11 @@ namespace Negocio
             return mPPSucursal.Guardar(bESucursal);
         }
 
+        public BESucursal ListarObjeto(BESucursal Objeto)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<BESucursal> ListarTodo()
         {
             return mPPSucursal.ListarTodo();

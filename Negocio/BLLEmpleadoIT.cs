@@ -33,9 +33,17 @@ namespace Negocio
             return mPPEmpleadoIT.Guardar(bEEmpleadoIT);
         }
 
+        public BEEmpleadoIT ListarObjeto(BEEmpleadoIT Objeto)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<BEEmpleadoIT> ListarTodo()
         {
             return mPPEmpleadoIT.ListarTodo();
         }
+
+       
+
     }
 }

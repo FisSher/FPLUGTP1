@@ -37,6 +37,11 @@ namespace Negocio
             return mPPEmpleadoMedico.Guardar(bEEmpleadoMedico);
         }
 
+        public BEEmpleadoMedico ListarObjeto(BEEmpleadoMedico Objeto)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<BEEmpleadoMedico> ListarTodo()
         {
             return mPPEmpleadoMedico.ListarTodo();
