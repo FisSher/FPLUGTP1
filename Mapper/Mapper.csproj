@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="MPPEmpleadoIT.cs" />
     <Compile Include="MPPEmpleadoMedico.cs" />
+    <Compile Include="MPPLocalidad.cs" />
     <Compile Include="MPPLogin.cs" />
     <Compile Include="MPPPuesto.cs" />
     <Compile Include="MPPSucursal.cs" />

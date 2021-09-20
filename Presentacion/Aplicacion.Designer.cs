@@ -62,7 +62,7 @@ namespace Presentacion
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -80,26 +80,30 @@ namespace Presentacion
             // nuevoEmpleadoToolStripMenuItem
             // 
             this.nuevoEmpleadoToolStripMenuItem.Name = "nuevoEmpleadoToolStripMenuItem";
-            this.nuevoEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.nuevoEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nuevoEmpleadoToolStripMenuItem.Text = "Empleados";
+            this.nuevoEmpleadoToolStripMenuItem.Click += new System.EventHandler(this.nuevoEmpleadoToolStripMenuItem_Click);
             // 
             // puestosToolStripMenuItem
             // 
             this.puestosToolStripMenuItem.Name = "puestosToolStripMenuItem";
-            this.puestosToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.puestosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.puestosToolStripMenuItem.Text = "Puestos";
+            this.puestosToolStripMenuItem.Click += new System.EventHandler(this.puestosToolStripMenuItem_Click);
             // 
             // sucursalesToolStripMenuItem
             // 
             this.sucursalesToolStripMenuItem.Name = "sucursalesToolStripMenuItem";
-            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sucursalesToolStripMenuItem.Text = "Sucursales";
+            this.sucursalesToolStripMenuItem.Click += new System.EventHandler(this.sucursalesToolStripMenuItem_Click);
             // 
             // localidadesToolStripMenuItem
             // 
             this.localidadesToolStripMenuItem.Name = "localidadesToolStripMenuItem";
-            this.localidadesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.localidadesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.localidadesToolStripMenuItem.Text = "Localidades";
+            this.localidadesToolStripMenuItem.Click += new System.EventHandler(this.localidadesToolStripMenuItem_Click);
             // 
             // Aplicacion
             // 
@@ -109,7 +113,9 @@ namespace Presentacion
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.Name = "Aplicacion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Aplicacion";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

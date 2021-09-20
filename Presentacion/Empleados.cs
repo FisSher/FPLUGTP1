@@ -16,5 +16,12 @@ namespace Presentacion
         {
             InitializeComponent();
         }
+
+        private void Empleados_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

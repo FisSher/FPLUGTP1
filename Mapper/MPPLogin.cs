@@ -12,10 +12,10 @@ namespace Mapper
     {
         public MPPLogin()
         {
-            oAcceso = new Acceso();
+            oDatos = new Acceso();
         }
 
-        private Acceso oAcceso;
+        private Acceso oDatos;
 
         public bool Baja(BELogin Objeto)
         {
@@ -27,16 +27,30 @@ namespace Mapper
             throw new NotImplementedException();
         }
 
+        public bool ExisteUsuario(BELogin bELogin)
+        {
+            oDatos = new Acceso();
+            return oDatos.LeerEscalar($"Select count(Usuario) from Usuarios where Usuario = '{bELogin.Usuario}'");
+        }
+
         public bool Guardar(BELogin Objeto)
         {
-            throw new NotImplementedException();
+            string query = $"Insert into Usuarios(Usuario,Password) values ('{Objeto.Usuario}','{Objeto.Passwd}')";
+            if (ExisteUsuario(Objeto))
+            {
+                return false;
+            }
+            else
+            {
+                return oDatos.Escribir(query);
+            }
         }
 
         //SELECT Usuario FROM Usuarios WHERE usuario = 'f'
         public BELogin ListarObjeto(BELogin bELogin)
         {
             string consulta = string.Format("SELECT Usuario, Password FROM Usuarios WHERE  Usuario = '{0}' AND Password ='{1}'", bELogin.Usuario,bELogin.Passwd);
-            DataTable tabla = oAcceso.Leer(consulta);
+            DataTable tabla = oDatos.Leer(consulta);
             if (tabla.Rows.Count > 0)
             {
                 foreach (DataRow item in tabla.Rows)

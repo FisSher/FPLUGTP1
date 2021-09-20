@@ -11,6 +11,8 @@ La sucursal posee una lista de empleados y localidad. Los empleados pueden tener
 
 Los puestos de trabajo se manejan en una tabla aparte para evitar múltiples nombres para un mismo puesto.
 
+Las localidades tienen solo el ID y el nombre en una tabla aparte.
+
 Se requiere el ABM de todas las clases y que los cambios persistan en una base de datos. 
 Para mantener el seguimiento de los recursos, la baja de los empleados es lógica.
 

@@ -38,8 +38,12 @@ namespace Negocio
 
         public bool Guardar(BELogin Objeto)
         {
-            throw new NotImplementedException();
+            BELogin oLogin = new BELogin();
+            oLogin.Passwd = GenerarSHA(Objeto.Passwd);
+            oLogin.Usuario = Objeto.Usuario;
+            return mPPLogin.Guardar(oLogin);
         }
+
 
         public BELogin ListarObjeto(BELogin bELogin)
         {

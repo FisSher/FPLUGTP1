@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using BE;
 using Negocio;
-using BE;
+using System;
+using System.Windows.Forms;
 
 namespace Presentacion
 {
     public partial class Login : Form
     {
-        BELogin bELogin;
-        BLLogin bLogin;
+        private BELogin bELogin;
+        private BLLogin bLogin;
 
         public Login()
         {
@@ -38,7 +31,30 @@ namespace Presentacion
             {
                 MessageBox.Show("Error de login");
             }
-            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            bELogin.Usuario = textBoxUsuario.Text;
+            bELogin.Passwd = textBoxContra.Text;
+            try
+            {
+                bool exito = bLogin.Guardar(bELogin);
+                if (!exito)
+                {
+                    MessageBox.Show("El usuario ya existe");
+                }
+                else
+                {
+                    MessageBox.Show("Registrado con exito");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

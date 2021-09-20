@@ -5,11 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BE;
+using DAL;
 
 namespace Mapper
 {
     public class MPPEmpleadoIT : IGestor<BEEmpleadoIT>
     {
+        public MPPEmpleadoIT()
+        {
+            oDatos = new Acceso();
+        }
+
+        private Acceso oDatos;
         public bool Baja(BEEmpleadoIT Objeto)
         {
             throw new NotImplementedException();

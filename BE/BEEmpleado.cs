@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public abstract class BEEmpleado:Entidad
+    public abstract class BEEmpleado : Entidad
     {
         #region props
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public int DNI { get; set; }
         public int Puesto { get; set; }
-        public double SalarioBase { get; set; }
+        public double Salario { get; set; }
         public int Baja { get; set; }
         public DateTime FechaIngreso { get; set; }
         public DateTime FechaEgreso { get; set; }
@@ -21,7 +21,7 @@ namespace BE
         #endregion
 
 
-
+        #region metodos
         //Voy a calcular algunos salarios correspondientes a la antiguedad
         public virtual int Calcular_antiguedad()
         {
@@ -33,11 +33,18 @@ namespace BE
 
             return Antiguedad;
         }
-        
+
         public virtual double Calcular_Salario()
         {
-            return SalarioBase;
+            return Salario;
         }
 
+        public override string ToString()
+        {
+            return Codigo + " " + Nombre + " " + Apellido;
+        }
+        #endregion
+
+        
     }
 }

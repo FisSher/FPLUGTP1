@@ -7,23 +7,9 @@ namespace DAL
 {
     public class Acceso
     {
-        //private readonly SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["MiCadenaDeConexion"].ToString());
 
-        private readonly SqlConnection sqlConnection = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=FPLUG;Integrated Security=True");
+        private readonly SqlConnection conexionSql = new SqlConnection(ConfigurationManager.ConnectionStrings["MiCadenaDeConexion"].ToString());
 
-        //Voy a ver si le doy uso, de ultima lo borro
-        public string PruebaConexion()
-        {
-            sqlConnection.Open();
-            if (sqlConnection.State == ConnectionState.Open)
-            {
-                return "Conexion ok";
-            }
-            else
-            {
-                return "No se pudo conectar a la base";
-            }
-        }
 
         //Traigo una lectura de tabla generica
         public DataTable Leer(string Consulta_SQL)
@@ -31,8 +17,8 @@ namespace DAL
             DataTable tabla = new DataTable();
             try
             {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Consulta_SQL, sqlConnection);
-                dataAdapter.Fill(tabla);
+                SqlDataAdapter DA = new SqlDataAdapter(Consulta_SQL, conexionSql);
+                DA.Fill(tabla);
             }
             catch (SqlException)
             {
@@ -42,18 +28,18 @@ namespace DAL
             {
                 throw;
             }
-            finally { sqlConnection.Close(); }
+            finally { conexionSql.Close(); }
 
             return tabla;
         }
 
         public DataSet Leer2(string Consulta_SQL)
         {
-            DataSet dataSet = new DataSet();
+            DataSet DS = new DataSet();
             try
             {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Consulta_SQL, sqlConnection);
-                dataAdapter.Fill(dataSet);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(Consulta_SQL, conexionSql);
+                dataAdapter.Fill(DS);
             }
             catch (SqlException)
             {
@@ -63,23 +49,23 @@ namespace DAL
             {
                 throw;
             }
-            finally { sqlConnection.Close(); }
+            finally { conexionSql.Close(); }
 
-            return dataSet;
+            return DS;
         }
 
         //Tengo que hacer acá el transaction
         public bool Escribir(string Consulta_SQL)
         {
-            sqlConnection.Open();
+            conexionSql.Open();
             SqlTransaction sqlTransaction;
             SqlCommand sqlCommand = new SqlCommand();
-            sqlTransaction = sqlConnection.BeginTransaction();
+            sqlTransaction = conexionSql.BeginTransaction();
 
             try
             {
                 sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.Connection = sqlConnection;
+                sqlCommand.Connection = conexionSql;
                 sqlCommand.CommandText = Consulta_SQL;
                 sqlCommand.Transaction = sqlTransaction;
                 sqlCommand.ExecuteNonQuery(); //Ejecuta->
@@ -94,29 +80,32 @@ namespace DAL
             catch (Exception ex)
             {
                 sqlTransaction.Rollback();
-                throw ex; 
+                throw ex;
             }
             finally
-            { sqlConnection.Close(); }
+            { conexionSql.Close(); }
         }
 
-        //Tengo que leer escalar para el tema base
         public bool LeerEscalar(string consulta)
         {
-            sqlConnection.Open();
-            SqlCommand cmd = new SqlCommand(consulta, sqlConnection);
+            conexionSql.Open();
+            SqlCommand cmd = new SqlCommand(consulta, conexionSql);
             cmd.CommandType = CommandType.Text;
             try
             {
                 int Respuesta = Convert.ToInt32(cmd.ExecuteScalar());
-                sqlConnection.Close();
+                conexionSql.Close();
                 if (Respuesta > 0)
                 { return true; }
                 else
                 { return false; }
             }
-            catch (SqlException)
-            { throw; }
+            catch (SqlException sqlex)
+            { throw sqlex; }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
