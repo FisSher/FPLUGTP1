@@ -122,7 +122,7 @@ namespace Presentacion
             // 
             // buttonQuitaEmpleado
             // 
-            this.buttonQuitaEmpleado.Location = new System.Drawing.Point(554, 21);
+            this.buttonQuitaEmpleado.Location = new System.Drawing.Point(554, 60);
             this.buttonQuitaEmpleado.Name = "buttonQuitaEmpleado";
             this.buttonQuitaEmpleado.Size = new System.Drawing.Size(114, 34);
             this.buttonQuitaEmpleado.TabIndex = 10;

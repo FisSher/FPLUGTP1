@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class BEEmpleadoMedico:BEEmpleado
+    public class BEEmpleadoMedico : BEEmpleado
     {
         public override double Calcular_Salario()
         {
-            return Salario * 1.50 + Antiguedad;
+            Salario = Salario + 1.50 * Antiguedad;
+            return Salario;
         }
     }
 }
