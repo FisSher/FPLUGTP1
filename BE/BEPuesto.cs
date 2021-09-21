@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BE
 {
@@ -14,14 +10,15 @@ namespace BE
         {
             return Codigo + " " + Nombre;
         }
-        
-        public BEPuesto() { }
+
+        public BEPuesto()
+        {
+        }
 
         //Constructor sobrecargado
         public BEPuesto(string _n)
         {
             Nombre = _n;
         }
-
     }
 }

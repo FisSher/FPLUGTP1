@@ -44,7 +44,6 @@ namespace Negocio
             return mPPLogin.Guardar(oLogin);
         }
 
-
         public BELogin ListarObjeto(BELogin bELogin)
         {
             BELogin beLogin = new BELogin();

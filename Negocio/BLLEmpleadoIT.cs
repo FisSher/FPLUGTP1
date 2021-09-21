@@ -16,12 +16,14 @@ namespace Negocio
         }
 
         #region unused
+
         //No va a ser fisica.
         public bool Baja(BEEmpleadoIT Objeto)
         {
             throw new NotImplementedException();
         }
-        #endregion
+
+        #endregion unused
 
         public bool BajaLogica(BEEmpleadoIT bEEmpleadoIT)
         {
@@ -42,8 +44,5 @@ namespace Negocio
         {
             return mPPEmpleadoIT.ListarTodo();
         }
-
-       
-
     }
 }

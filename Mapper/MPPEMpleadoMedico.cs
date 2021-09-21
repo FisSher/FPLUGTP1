@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Abstraccion;
+﻿using Abstraccion;
 using BE;
 using DAL;
+using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Mapper
 {
     public class MPPEmpleadoMedico : IGestor<BEEmpleadoMedico>
     {
-
         public MPPEmpleadoMedico()
         {
             oDatos = new Acceso();
         }
 
         private Acceso oDatos;
+
         public bool Baja(BEEmpleadoMedico Objeto)
         {
             throw new NotImplementedException();
@@ -29,8 +26,6 @@ namespace Mapper
             string query = $"UPDATE Empleado SET Baja=1, FechaEgreso = '{DateTime.Now.ToShortDateString()}' where IdEmpleado='{e.Codigo}'";
             return oDatos.Escribir(query);
         }
-
-
 
         public bool Guardar(BEEmpleadoMedico e)
         {
@@ -113,7 +108,6 @@ namespace Mapper
 
                         LEmpleadosMedico.Add(empleado);
                     }
-
                 }
             }
             else

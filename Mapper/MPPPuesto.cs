@@ -24,7 +24,6 @@ namespace Mapper
             return oDatos.Escribir(query);
         }
 
- 
         public bool BajaLogica(BEPuesto Objeto)
         {
             throw new NotImplementedException();

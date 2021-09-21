@@ -7,9 +7,7 @@ namespace DAL
 {
     public class Acceso
     {
-
         private readonly SqlConnection conexionSql = new SqlConnection(ConfigurationManager.ConnectionStrings["MiCadenaDeConexion"].ToString());
-
 
         //Traigo una lectura de tabla generica
         public DataTable Leer(string Consulta_SQL)

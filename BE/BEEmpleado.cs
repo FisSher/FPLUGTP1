@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BE
 {
     public abstract class BEEmpleado : Entidad
     {
         #region props
+
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public int DNI { get; set; }
@@ -18,10 +15,11 @@ namespace BE
         public DateTime FechaIngreso { get; set; }
         public DateTime FechaEgreso { get; set; }
         public int Antiguedad { get; set; }
-        #endregion
 
+        #endregion props
 
         #region metodos
+
         public virtual int Calcular_antiguedad()
         {
             Antiguedad = DateTime.Now.Year - FechaIngreso.Year;
@@ -42,8 +40,7 @@ namespace BE
         {
             return Codigo + " " + Nombre + " " + Apellido;
         }
-        #endregion
 
-        
+        #endregion metodos
     }
 }

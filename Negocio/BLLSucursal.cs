@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Abstraccion;
 using BE;
-using Abstraccion;
 using Mapper;
+using System;
+using System.Collections.Generic;
 
 namespace Negocio
 {
     public class BLLSucursal : IGestor<BESucursal>
     {
+        private MPPSucursal mPPSucursal;
 
-        MPPSucursal mPPSucursal;
         public BLLSucursal()
         {
             mPPSucursal = new MPPSucursal();
         }
-
 
         public bool Baja(BESucursal bESucursal)
         {

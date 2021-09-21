@@ -242,7 +242,6 @@ namespace Presentacion
                     oSucursal.Sucursal_Empleado(sucursal, oBEEmpladoMedico);
                     MessageBox.Show("Agregado con éxito");
                     CargarSucursales();
-
                 }
             }
             catch (Exception ex)

@@ -62,8 +62,6 @@ namespace Mapper
             throw new NotImplementedException();
         }
 
-        
-
         public List<BESucursal> ListarTodo()
         {
             DataSet dataSet;
@@ -90,7 +88,7 @@ namespace Mapper
                     //Cada vez que reformatee esta consulta el contador va a aumentar: 7
                     string query2 = string.Format(@"Select IdEmpleado,Empleado.Nombre as Nombre,Empleado.Apellido as Apellido,DNI,Puesto,Salario,Baja,FechaIngreso,FechaEgreso,Antiguedad,Lenguaje_Programacion
                                         from Empleado,Empleado_Sucursal
-                                        where Empleado.IdEmpleado = Empleado_Sucursal.NumEmpleado 
+                                        where Empleado.IdEmpleado = Empleado_Sucursal.NumEmpleado
                                         and Empleado_Sucursal.NumSucursal ={0}", oSucursal.Codigo);
                     Acceso oDatos2 = new Acceso();
                     DataSet Ds2 = new DataSet();

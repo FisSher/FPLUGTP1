@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mapper;
+﻿using Abstraccion;
 using BE;
-using Abstraccion;
+using Mapper;
+using System;
+using System.Collections.Generic;
 
 namespace Negocio
 {
     public class BLLPuesto : IGestor<BEPuesto>
     {
+        private MPPPuesto mPPPuesto;
 
-        MPPPuesto mPPPuesto;
         public BLLPuesto()
         {
             mPPPuesto = new MPPPuesto();

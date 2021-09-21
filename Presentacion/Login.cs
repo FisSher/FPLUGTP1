@@ -35,7 +35,6 @@ namespace Presentacion
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             bELogin.Usuario = textBoxUsuario.Text;
             bELogin.Passwd = textBoxContra.Text;
             try
@@ -49,7 +48,6 @@ namespace Presentacion
                 {
                     MessageBox.Show("Registrado con exito");
                 }
-                
             }
             catch (Exception ex)
             {

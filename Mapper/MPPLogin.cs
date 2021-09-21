@@ -46,10 +46,9 @@ namespace Mapper
             }
         }
 
-        //SELECT Usuario FROM Usuarios WHERE usuario = 'f'
         public BELogin ListarObjeto(BELogin bELogin)
         {
-            string consulta = string.Format("SELECT Usuario, Password FROM Usuarios WHERE  Usuario = '{0}' AND Password ='{1}'", bELogin.Usuario,bELogin.Passwd);
+            string consulta = string.Format("SELECT Usuario, Password FROM Usuarios WHERE  Usuario = '{0}' AND Password ='{1}'", bELogin.Usuario, bELogin.Passwd);
             DataTable tabla = oDatos.Leer(consulta);
             if (tabla.Rows.Count > 0)
             {
