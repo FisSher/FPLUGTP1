@@ -22,17 +22,16 @@ namespace BE
 
 
         #region metodos
-        //Voy a calcular algunos salarios correspondientes a la antiguedad
-        //public virtual int Calcular_antiguedad()
-        //{
-        //    Antiguedad = DateTime.Now.Year - FechaIngreso.Year;
-        //    if (DateTime.Now.Month < FechaIngreso.Month)
-        //        Antiguedad -= 1;
-        //    if (DateTime.Now.Month == FechaIngreso.Month && DateTime.Now.Day < FechaIngreso.Day)
-        //        Antiguedad -= 1;
+        public virtual int Calcular_antiguedad()
+        {
+            Antiguedad = DateTime.Now.Year - FechaIngreso.Year;
+            if (DateTime.Now.Month < FechaIngreso.Month)
+                Antiguedad -= 1;
+            if (DateTime.Now.Month == FechaIngreso.Month && DateTime.Now.Day < FechaIngreso.Day)
+                Antiguedad -= 1;
 
-        //    return Antiguedad;
-        //}
+            return Antiguedad;
+        }
 
         public virtual double Calcular_Salario()
         {

@@ -34,6 +34,16 @@ namespace Negocio
             return mPPSucursal.Guardar(bESucursal);
         }
 
+        public bool Sucursal_Empleado(BESucursal bESucursal, BEEmpleado empleado)
+        {
+            return mPPSucursal.Sucursal_Empleado(bESucursal, empleado);
+        }
+
+        public bool Quitar_Sucursal_Empleado(BESucursal bESucursal, BEEmpleado empleado)
+        {
+            return mPPSucursal.Quitar_Sucursal_Empleado(bESucursal, empleado);
+        }
+
         public BESucursal ListarObjeto(BESucursal Objeto)
         {
             throw new NotImplementedException();

@@ -55,6 +55,8 @@ namespace Presentacion
             this.listBoxSucursales.DataSource = oSucursal.ListarTodo();
         }
 
+        #region ABM EMPLEADOS
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -65,15 +67,17 @@ namespace Presentacion
                     empleado.Nombre = textBoxNombre.Text;
                     empleado.Apellido = textBoxApellido.Text;
                     empleado.DNI = Convert.ToInt32(textBoxDNI.Text);
-                    BEPuesto puesto = (BEPuesto)comboBox1.SelectedItem;
-                    empleado.Puesto = puesto.Codigo;
-                    empleado.Salario = Convert.ToDouble(textBoxSalario.Text);
-                    empleado.Calcular_Salario();
                     empleado.Baja = 0;
                     empleado.FechaIngreso = dateTimePicker1.Value;
                     empleado.FechaEgreso = dateTimePicker2.Value;
+                    empleado.Antiguedad = empleado.Calcular_antiguedad();
+                    empleado.Salario = Convert.ToDouble(textBoxSalario.Text);
+                    empleado.Salario = empleado.Calcular_Salario();
+                    BEPuesto puesto = (BEPuesto)comboBox1.SelectedItem;
+                    empleado.Puesto = puesto.Codigo;
                     oEmpleadoMedico.Guardar(empleado);
                     CargarGrillaMedicos();
+                    CargarSucursales();
                 }
                 else
                 {
@@ -81,16 +85,18 @@ namespace Presentacion
                     empleadoIT.Nombre = textBoxNombre.Text;
                     empleadoIT.Apellido = textBoxApellido.Text;
                     empleadoIT.DNI = Convert.ToInt32(textBoxDNI.Text);
-                    BEPuesto puesto = (BEPuesto)comboBox1.SelectedItem;
-                    empleadoIT.Puesto = puesto.Codigo;
-                    empleadoIT.Salario = Convert.ToDouble(textBoxSalario.Text);
-                    empleadoIT.Calcular_Salario();
                     empleadoIT.Baja = 0;
                     empleadoIT.FechaIngreso = dateTimePicker1.Value;
                     empleadoIT.FechaEgreso = dateTimePicker2.Value;
                     empleadoIT.Lenguaje = textBoxLeng.Text;
+                    empleadoIT.Antiguedad = empleadoIT.Calcular_antiguedad();
+                    empleadoIT.Salario = Convert.ToDouble(textBoxSalario.Text);
+                    empleadoIT.Salario = empleadoIT.Calcular_Salario();
+                    BEPuesto puesto = (BEPuesto)comboBox1.SelectedItem;
+                    empleadoIT.Puesto = puesto.Codigo;
                     oEmpleadoIT.Guardar(empleadoIT);
                     CargarGrillaIT();
+                    CargarSucursales();
                 }
             }
             catch (Exception ex)
@@ -118,6 +124,7 @@ namespace Presentacion
                     empleadoMedico.FechaEgreso = dateTimePicker2.Value;
                     oEmpleadoMedico.Guardar(empleadoMedico);
                     CargarGrillaMedicos();
+                    CargarSucursales();
                 }
                 else if (radioButton2.Checked)
                 {
@@ -135,6 +142,7 @@ namespace Presentacion
                     empleadoIT.Lenguaje = textBoxLeng.Text;
                     oEmpleadoIT.Guardar(empleadoIT);
                     CargarGrillaIT();
+                    CargarSucursales();
                 }
                 else
                 {
@@ -162,6 +170,7 @@ namespace Presentacion
                     {
                         oEmpleadoMedico.BajaLogica(empleadoMedico);
                         CargarGrillaMedicos();
+                        CargarSucursales();
                     }
                     else
                     {
@@ -179,6 +188,7 @@ namespace Presentacion
                     {
                         oEmpleadoIT.BajaLogica(empleadoIT);
                         CargarGrillaIT();
+                        CargarSucursales();
                     }
                     else
                     {
@@ -196,22 +206,90 @@ namespace Presentacion
             }
         }
 
+        #endregion ABM EMPLEADOS
+
+        //boton asigna medico
         private void button4_Click(object sender, EventArgs e)
         {
+            try
+            {
+                bool found = false;
+                BEEmpleadoMedico oBEEmpladoMedico = (BEEmpleadoMedico)dataGridView1.CurrentRow.DataBoundItem;
+                BESucursal sucursal = (BESucursal)listBoxSucursales.SelectedItem;
+                if (sucursal.ListaEmplados != null)
+                {
+                    foreach (BEEmpleado empleado in sucursal.ListaEmplados)
+                    {
+                        if (empleado.DNI == oBEEmpladoMedico.DNI)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                    {
+                        oSucursal.Sucursal_Empleado(sucursal, oBEEmpladoMedico);
+                        MessageBox.Show("Agregado con éxito");
+                        CargarSucursales();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El empleado ya está en la sucursal");
+                    }
+                }
+                else
+                {
+                    oSucursal.Sucursal_Empleado(sucursal, oBEEmpladoMedico);
+                    MessageBox.Show("Agregado con éxito");
+                    CargarSucursales();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         private void buttonAsignaIT_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                bool found = false;
+                BEEmpleadoIT empleado = (BEEmpleadoIT)dataGridView2.CurrentRow.DataBoundItem;
+                BESucursal sucursal = (BESucursal)listBoxSucursales.SelectedItem;
+                if (sucursal.ListaEmplados != null)
+                {
+                    foreach (BEEmpleado BEempleado in sucursal.ListaEmplados)
+                    {
+                        if (BEempleado.DNI == empleado.DNI)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                    {
+                        oSucursal.Sucursal_Empleado(sucursal, empleado);
+                        MessageBox.Show("Agregado con éxito");
+                        CargarSucursales();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El empleado ya está en la sucursal");
+                    }
+                }
+                else
+                {
+                    oSucursal.Sucursal_Empleado(sucursal, empleado);
+                    MessageBox.Show("Agregado con éxito");
+                    CargarSucursales();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
-        //No se que iba a hacer con esto
-        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-
-        private void dataGridView2_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-
-        
     }
 }

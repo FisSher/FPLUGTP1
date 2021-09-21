@@ -1,11 +1,8 @@
 ﻿using Abstraccion;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BE;
 using DAL;
+using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Mapper
@@ -18,6 +15,7 @@ namespace Mapper
         }
 
         private Acceso oDatos;
+
         public bool Baja(BEEmpleadoIT Objeto)
         {
             throw new NotImplementedException();
@@ -31,9 +29,8 @@ namespace Mapper
 
         public bool Guardar(BEEmpleadoIT e)
         {
-
             string query;
-            if (e.Codigo ==0)
+            if (e.Codigo == 0)
             {
                 if (e.FechaEgreso > e.FechaIngreso)
                 {
@@ -51,7 +48,7 @@ namespace Mapper
                 if (e.FechaEgreso > e.FechaIngreso)
                 {
                     query = string.Format(" UPDATE Empleado SET Nombre='{0}', Apellido = '{1}', DNI = '{2}', Puesto='{3}',Salario='{4}',FechaIngreso='{5}',FechaEgreso='{6}',Antiguedad='{7}',Lenguaje_Programacion='{8}' where IdEmpleado='{9}'",
-                        e.Nombre,e.Apellido,e.DNI,e.Puesto,e.Salario,e.FechaIngreso,e.FechaEgreso,e.Antiguedad,e.Lenguaje,e.Codigo);
+                        e.Nombre, e.Apellido, e.DNI, e.Puesto, e.Salario, e.FechaIngreso, e.FechaEgreso, e.Antiguedad, e.Lenguaje, e.Codigo);
                     return oDatos.Escribir(query);
                 }
                 else
@@ -61,7 +58,6 @@ namespace Mapper
                     return oDatos.Escribir(query);
                 }
             }
-            
         }
 
         public bool GuardarEnSucursal(BESucursal sucursal, BEEmpleadoIT empleado)
@@ -96,20 +92,27 @@ namespace Mapper
             {
                 foreach (DataRow item in tabla.Rows)
                 {
-                    BEEmpleadoIT empleado = new BEEmpleadoIT();
-                    empleado.Codigo = Convert.ToInt32(item[0]);
-                    empleado.Nombre = item["Nombre"].ToString();
-                    empleado.Apellido = item["Apellido"].ToString();
-                    empleado.DNI = Convert.ToInt32(item["DNI"]);
-                    empleado.Puesto = Convert.ToInt32(item["Puesto"]);
-                    empleado.Salario = Convert.ToDouble(item["Salario"]);
-                    empleado.Baja = Convert.ToInt32(item["Baja"]);
-                    if (empleado.Baja == 1)
-                        empleado.FechaEgreso = Convert.ToDateTime(item["FechaEgreso"]);
-                    empleado.FechaIngreso = Convert.ToDateTime(item["FechaIngreso"]);
-                    empleado.Antiguedad = Convert.ToInt32(item["Antiguedad"]);
-                    empleado.Lenguaje = item["Lenguaje_Programacion"].ToString();
-                    LEmpleadosIT.Add(empleado);
+                    if (!(item["Lenguaje_Programacion"] is DBNull))
+                    {
+                        BEEmpleadoIT empleado = new BEEmpleadoIT();
+                        empleado.Codigo = Convert.ToInt32(item[0]);
+                        empleado.Nombre = item["Nombre"].ToString();
+                        empleado.Apellido = item["Apellido"].ToString();
+                        empleado.DNI = Convert.ToInt32(item["DNI"]);
+                        empleado.Puesto = Convert.ToInt32(item["Puesto"]);
+                        empleado.Salario = Convert.ToDouble(item["Salario"]);
+                        empleado.Baja = Convert.ToInt32(item["Baja"]);
+                        if (empleado.Baja == 1)
+                            empleado.FechaEgreso = Convert.ToDateTime(item["FechaEgreso"]);
+                        empleado.FechaIngreso = Convert.ToDateTime(item["FechaIngreso"]);
+                        empleado.Antiguedad = Convert.ToInt32(item["Antiguedad"]);
+                        empleado.Lenguaje = item["Lenguaje_Programacion"].ToString();
+                        LEmpleadosIT.Add(empleado);
+                    }
+                    else
+                    {
+                    }
+
                 }
             }
             else

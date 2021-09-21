@@ -78,6 +78,7 @@ namespace Presentacion
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(161, 277);
             this.listBox1.TabIndex = 3;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // textBox1
             // 
@@ -115,7 +116,7 @@ namespace Presentacion
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(387, 13);
+            this.listBox2.Location = new System.Drawing.Point(370, 13);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(161, 277);
             this.listBox2.TabIndex = 9;
@@ -128,6 +129,7 @@ namespace Presentacion
             this.buttonQuitaEmpleado.TabIndex = 10;
             this.buttonQuitaEmpleado.Text = "Quitar empleado";
             this.buttonQuitaEmpleado.UseVisualStyleBackColor = true;
+            this.buttonQuitaEmpleado.Click += new System.EventHandler(this.buttonQuitaEmpleado_Click);
             // 
             // Sucursal
             // 
