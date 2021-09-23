@@ -21,6 +21,15 @@ namespace Presentacion
         {
             this.listBox1.DataSource = null;
             this.listBox1.DataSource = oBLLLocalidad.ListarTodo();
+            if (oBLLLocalidad.ListarTodo().Count>0)
+            {
+                label3.Text = oBLLLocalidad.ListarTodo().Count.ToString();
+            }
+            else
+            {
+            label3.Text = "0";
+
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

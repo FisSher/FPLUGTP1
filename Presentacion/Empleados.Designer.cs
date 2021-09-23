@@ -61,6 +61,10 @@ namespace Presentacion
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.label10 = new System.Windows.Forms.Label();
+            this.labelTotM = new System.Windows.Forms.Label();
+            this.labelTotIt = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -350,11 +354,51 @@ namespace Presentacion
             this.label10.TabIndex = 35;
             this.label10.Text = "Para modificar, seleccione una de las tablas";
             // 
+            // labelTotM
+            // 
+            this.labelTotM.AutoSize = true;
+            this.labelTotM.Location = new System.Drawing.Point(609, 335);
+            this.labelTotM.Name = "labelTotM";
+            this.labelTotM.Size = new System.Drawing.Size(10, 13);
+            this.labelTotM.TabIndex = 36;
+            this.labelTotM.Text = "-";
+            // 
+            // labelTotIt
+            // 
+            this.labelTotIt.AutoSize = true;
+            this.labelTotIt.Location = new System.Drawing.Point(1119, 335);
+            this.labelTotIt.Name = "labelTotIt";
+            this.labelTotIt.Size = new System.Drawing.Size(10, 13);
+            this.labelTotIt.TabIndex = 37;
+            this.labelTotIt.Text = "-";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(447, 335);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(130, 13);
+            this.label11.TabIndex = 38;
+            this.label11.Text = "Total empleados médicos:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(996, 335);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(96, 13);
+            this.label15.TabIndex = 39;
+            this.label15.Text = "Total empleados it:";
+            // 
             // Empleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1343, 715);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.labelTotIt);
+            this.Controls.Add(this.labelTotM);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
@@ -431,5 +475,9 @@ namespace Presentacion
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label labelTotM;
+        private System.Windows.Forms.Label labelTotIt;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label15;
     }
 }

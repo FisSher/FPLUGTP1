@@ -24,6 +24,14 @@ namespace Presentacion
         {
             this.listBox1.DataSource = null;
             this.listBox1.DataSource = oBLLSucursal.ListarTodo();
+            if (oBLLSucursal.ListarTodo().Count > 0)
+            {
+                label4.Text = oBLLSucursal.ListarTodo().Count.ToString();
+            }
+            else
+            {
+                label4.Text = "0";
+            }
         }
 
         private void ListarEmpleados(BESucursal sucursal)

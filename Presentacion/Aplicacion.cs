@@ -42,5 +42,12 @@ namespace Presentacion
             vLocalidad.MdiParent = this;
             vLocalidad.Show();
         }
+
+        private void informesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Informes vInformes = new Informes();
+            vInformes.MdiParent = this;
+            vInformes.Show();
+        }
     }
 }

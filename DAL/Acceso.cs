@@ -66,7 +66,7 @@ namespace DAL
                 sqlCommand.Connection = conexionSql;
                 sqlCommand.CommandText = Consulta_SQL;
                 sqlCommand.Transaction = sqlTransaction;
-                sqlCommand.ExecuteNonQuery(); //Ejecuta->
+                sqlCommand.ExecuteNonQuery(); 
                 sqlTransaction.Commit();
                 return true;
             }

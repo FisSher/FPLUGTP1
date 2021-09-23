@@ -48,6 +48,7 @@ namespace Presentacion
             // 
             this.textBoxContra.Location = new System.Drawing.Point(39, 95);
             this.textBoxContra.Name = "textBoxContra";
+            this.textBoxContra.PasswordChar = '*';
             this.textBoxContra.Size = new System.Drawing.Size(100, 20);
             this.textBoxContra.TabIndex = 1;
             // 

@@ -33,6 +33,15 @@ namespace Presentacion
         {
             this.dataGridView1.DataSource = null;
             this.dataGridView1.DataSource = oEmpleadoMedico.ListarTodo();
+            if (oEmpleadoMedico.ListarTodo().Count >0)
+            {
+                this.labelTotM.Text = oEmpleadoMedico.ListarTodo().Count.ToString();
+
+            }
+            else
+            {
+                this.labelTotM.Text = "0";
+            }
             this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
         }
 
@@ -40,6 +49,15 @@ namespace Presentacion
         {
             this.dataGridView2.DataSource = null;
             this.dataGridView2.DataSource = oEmpleadoIT.ListarTodo();
+            if (oEmpleadoIT.ListarTodo().Count > 0)
+            {
+                this.labelTotIt.Text = oEmpleadoIT.ListarTodo().Count.ToString();
+
+            }
+            else
+            {
+                this.labelTotIt.Text = "0";
+            }
             this.dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
         }
 

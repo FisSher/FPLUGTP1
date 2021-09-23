@@ -21,6 +21,14 @@ namespace Presentacion
         {
             this.listBox1.DataSource = null;
             this.listBox1.DataSource = oBLLPuesto.ListarTodo();
+            if (oBLLPuesto.ListarTodo().Count>0)
+            {
+                label3.Text = oBLLPuesto.ListarTodo().Count.ToString();
+            }
+            else
+            {
+                label3.Text = "0";
+            }
         }
 
         private void Puesto_Load(object sender, EventArgs e)
