@@ -24,6 +24,7 @@ namespace Mapper
             }
             else
             {
+                //TODO: S_Localidad_Baja
                 string query = $"DELETE FROM Localidades where IdLocalidad = '{localidad.Codigo}'";
                 oDatos = new Acceso();
                 return oDatos.Escribir(query);
@@ -50,11 +51,11 @@ namespace Mapper
         {
             string consulta;
             if (Objeto.Codigo != 0)
-            {
+            {//TODO: S_Localidad_Update
                 consulta = string.Format("UPDATE Localidades SET Nombre = '{0}' where IdLocalidad = '{1}'", Objeto.Nombre, Objeto.Codigo);
             }
             else
-            {
+            {//TODO: S_Localidad_Crear
                 consulta = $"Insert into Localidades(Nombre) VALUES('{Objeto.Nombre}')";
             }
             oDatos = new Acceso();
@@ -63,6 +64,7 @@ namespace Mapper
 
         public List<BELocalidad> ListarTodo()
         {
+            //TODO: S_Localidad_ListarTodo
             DataTable tabla;
             oDatos = new Acceso();
             tabla = oDatos.Leer("Select IdLocalidad,Nombre From Localidades");

@@ -7,6 +7,7 @@ using System.Data;
 
 namespace Mapper
 {
+    //Listo para los SP
     public class MPPEmpleadoIT : IGestor<BEEmpleadoIT>
     {
         public MPPEmpleadoIT()
@@ -23,6 +24,7 @@ namespace Mapper
 
         public bool BajaLogica(BEEmpleadoIT e)
         {
+            //TODO: Reemplazar BAJA LOGICA
             string query = $"UPDATE Empleado SET Baja=1, FechaEgreso = '{DateTime.Now.ToShortDateString()}' where IdEmpleado='{e.Codigo}'";
             return oDatos.Escribir(query);
         }
@@ -34,11 +36,13 @@ namespace Mapper
             {
                 if (e.FechaEgreso > e.FechaIngreso)
                 {
+                    //TODO: Reemplazar CREAR
                     query = $"Insert into Empleado(Nombre,Apellido,DNI,Puesto,Salario,Baja,FechaIngreso,Antiguedad,Lenguaje_Programacion,FechaEgreso) values ('{e.Nombre}','{e.Apellido}','{e.DNI}','{e.Puesto}','{e.Salario}','{e.Baja}','{e.FechaIngreso}','{e.Antiguedad}','{e.Lenguaje}','{e.FechaEgreso}')";
                     return oDatos.Escribir(query);
                 }
                 else
                 {
+                    //TODO: Reemplazar CREAR NO EGRESADO
                     query = $"Insert into Empleado(Nombre,Apellido,DNI,Puesto,Salario,Baja,FechaIngreso,Antiguedad,Lenguaje_Programacion) values ('{e.Nombre}','{e.Apellido}','{e.DNI}','{e.Puesto}','{e.Salario}','{e.Baja}','{e.FechaIngreso}','{e.Antiguedad}','{e.Lenguaje}')";
                     return oDatos.Escribir(query);
                 }
@@ -47,12 +51,14 @@ namespace Mapper
             {
                 if (e.FechaEgreso > e.FechaIngreso)
                 {
+                    //TODO: S_EmpleadoIT_UpdateEgresado
                     query = string.Format(" UPDATE Empleado SET Nombre='{0}', Apellido = '{1}', DNI = '{2}', Puesto='{3}',Salario='{4}',FechaIngreso='{5}',FechaEgreso='{6}',Antiguedad='{7}',Lenguaje_Programacion='{8}' where IdEmpleado='{9}'",
                         e.Nombre, e.Apellido, e.DNI, e.Puesto, e.Salario, e.FechaIngreso, e.FechaEgreso, e.Antiguedad, e.Lenguaje, e.Codigo);
                     return oDatos.Escribir(query);
                 }
                 else
                 {
+                    //TODO:  S_EmpleadoIT_UpdateNOEgresado
                     query = string.Format(" UPDATE Empleado SET Nombre='{0}', Apellido = '{1}', DNI = '{2}', Puesto='{3}',Salario='{4}',FechaIngreso='{5}',Antiguedad='{6}',Lenguaje_Programacion='{7}' where IdEmpleado='{8}'",
                                        e.Nombre, e.Apellido, e.DNI, e.Puesto, e.Salario, e.FechaIngreso, e.Antiguedad, e.Lenguaje, e.Codigo);
                     return oDatos.Escribir(query);
@@ -71,6 +77,7 @@ namespace Mapper
             }
             else
             {
+                //TODO: S_Empleado_GuardarEnSucursal
                 query = $"Insert into Empleado_Sucursal(IdEmpleado,IdSucursal) values ({empleado.Codigo},{sucursal.Codigo})";
                 return oDatos.Escribir(query);
             }
@@ -85,6 +92,7 @@ namespace Mapper
         {
             DataTable tabla;
             oDatos = new Acceso();
+            //TODO: S_EmpleadoIT_ListarTodo
             tabla = oDatos.Leer("Select IdEmpleado,Nombre,Apellido,DNI,Puesto,Salario,Baja,FechaIngreso,FechaEgreso,Antiguedad,Lenguaje_Programacion from Empleado");
             List<BEEmpleadoIT> LEmpleadosIT = new List<BEEmpleadoIT>();
 

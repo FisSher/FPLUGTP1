@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 
 namespace Mapper
-{
+{//Listo para los SP
     public class MPPEmpleado : IGestor<BEEmpleado>
     {
         public MPPEmpleado()
@@ -17,7 +17,7 @@ namespace Mapper
         public List<BEEmpleado> ListarTodo()
         {
             List<BEEmpleado> ListaEmpleados = new List<BEEmpleado>();
-
+            //TODO: Reemplazar
             string query = "Select IdEmpleado, Nombre, Apellido, DNI, Puesto, Salario, Baja, FechaIngreso, FechaEgreso, Antiguedad, Lenguaje_Programacion from Empleado";
 
             DataTable tabla = oDatos.Leer(query);

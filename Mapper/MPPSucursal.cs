@@ -18,7 +18,8 @@ namespace Mapper
 
         public bool Baja(BESucursal suc)
         {
-            string query = $"DELETE FROM Puesto where IdPuesto = '{suc.Codigo}'";
+            //TODO: S_Sucursal_Baja
+            string query = $"DELETE FROM Sucursales where IdSucursal = '{suc.Codigo}'";
             oDatos = new Acceso();
             return oDatos.Escribir(query);
         }
@@ -32,11 +33,11 @@ namespace Mapper
         {
             string query;
             if (sucursal.Codigo == 0)
-            {
+            {//TODO: S_Sucursal_Crear
                 query = $"Insert into Sucursales (NombreSuc,Localidad) values ('{sucursal.Nombre}','{sucursal.Localidad.Codigo}')";
             }
             else
-            {
+            {//TODO:S_Sucursal_Update
                 query = $"UPDATE Sucursales SET NombreSuc = '{sucursal.Nombre}', Localidad = '{sucursal.Localidad.Codigo}' where IdSucursal = '{sucursal.Codigo}'";
             }
             oDatos = new Acceso();
@@ -45,6 +46,7 @@ namespace Mapper
 
         public bool Quitar_Sucursal_Empleado(BESucursal bESucursal, BEEmpleado empleado)
         {
+            //TODO: S_Sucursal_QuitarEmpleado
             string query = string.Format(" Delete from Empleado_Sucursal where NumSucursal = {0}  and NumEmpleado ={1}", bESucursal.Codigo, empleado.Codigo);
             oDatos = new Acceso();
             return oDatos.Escribir(query);
@@ -52,6 +54,7 @@ namespace Mapper
 
         public bool Sucursal_Empleado(BESucursal sucursal, BEEmpleado empleado)
         {
+            //TODO: S_Sucursal_Empleado
             string query = string.Format(@"Insert into Empleado_Sucursal (NumSucursal,NumEmpleado) values ('{0}','{1}')", sucursal.Codigo, empleado.Codigo);
             oDatos = new Acceso();
             return oDatos.Escribir(query);
@@ -66,6 +69,7 @@ namespace Mapper
         {
             DataSet dataSet;
             oDatos = new Acceso();
+            //TODO: S_Sucursal_ListarTodo
             string query = $"Select Sucursales.IdSucursal, Sucursales.NombreSuc, Localidades.IdLocalidad,Localidades.Nombre from Sucursales,Localidades where Sucursales.Localidad = Localidades.IdLocalidad";
             dataSet = oDatos.Leer2(query);
             List<BESucursal> ListaSucursales = new List<BESucursal>();
@@ -85,7 +89,9 @@ namespace Mapper
                     oSucursal.Localidad = LocalidadTabla;
 
                     //Segunda consulta acá estoy hasta las manos
-                    //Cada vez que reformatee esta consulta el contador va a aumentar: 7
+                    //Cada vez que reformatee esta consulta el contador va a aumentar:   > 10 < 
+
+                    //TODO: S_Sucursal_ListarTodoParteDos
                     string query2 = string.Format(@"Select IdEmpleado,Empleado.Nombre as Nombre,Empleado.Apellido as Apellido,DNI,Puesto,Salario,Baja,FechaIngreso,FechaEgreso,Antiguedad,Lenguaje_Programacion
                                         from Empleado,Empleado_Sucursal
                                         where Empleado.IdEmpleado = Empleado_Sucursal.NumEmpleado

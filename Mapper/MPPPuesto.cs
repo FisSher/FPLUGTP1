@@ -17,7 +17,7 @@ namespace Mapper
         private Acceso oDatos;
 
         public bool Baja(BEPuesto Objeto)
-        {
+        {//TODO:S_Puesto_Baja
             string query;
             query = $"DELETE FROM Puesto where IdPuesto = '{Objeto.Codigo}'";
             oDatos = new Acceso();
@@ -33,11 +33,11 @@ namespace Mapper
         {
             string query;
             if (puesto.Codigo == 0)
-            {
+            {//TODO: S_Puesto_Crear
                 query = $"Insert into Puesto(Nombre) values('{puesto.Nombre}')";
             }
             else
-            {
+            {//TODO: S_Puesto_Update
                 query = $"UPDATE Puesto SET Nombre='{puesto.Nombre}' where IdPuesto ='{puesto.Codigo}'";
             }
             oDatos = new Acceso();
@@ -51,6 +51,7 @@ namespace Mapper
 
         public List<BEPuesto> ListarTodo()
         {
+            //TODO: S_Puesto_ListarTodo
             DataTable tabla;
             oDatos = new Acceso();
             tabla = oDatos.Leer("SELECT IdPuesto,Nombre FROM Puesto");

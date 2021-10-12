@@ -22,7 +22,7 @@ namespace Mapper
         }
 
         public bool BajaLogica(BEEmpleadoMedico e)
-        {
+        {//TODO: S_Empleado_BajaLogica
             string query = $"UPDATE Empleado SET Baja=1, FechaEgreso = '{DateTime.Now.ToShortDateString()}' where IdEmpleado='{e.Codigo}'";
             return oDatos.Escribir(query);
         }
@@ -33,12 +33,13 @@ namespace Mapper
             if (e.Codigo == 0)
             {
                 if (e.FechaEgreso > e.FechaIngreso)
-                {
+                {//TODO: S_EmpleadoMedico_Crear
                     query = $"Insert into Empleado(Nombre,Apellido,DNI,Puesto,Salario,Baja,FechaIngreso,Antiguedad,FechaEgreso) values ('{e.Nombre}','{e.Apellido}','{e.DNI}','{e.Puesto}','{e.Salario}','{e.Baja}','{e.FechaIngreso}','{e.Antiguedad}','{e.FechaEgreso}')";
                     return oDatos.Escribir(query);
                 }
                 else
                 {
+                    //TODO: S_EmpleadoMedico_CrearNOEgresado
                     query = $"Insert into Empleado(Nombre,Apellido,DNI,Puesto,Salario,Baja,FechaIngreso,Antiguedad) values ('{e.Nombre}','{e.Apellido}','{e.DNI}','{e.Puesto}','{e.Salario}','{e.Baja}','{e.FechaIngreso}','{e.Antiguedad}')";
                     return oDatos.Escribir(query);
                 }
@@ -46,13 +47,13 @@ namespace Mapper
             else
             {
                 if (e.FechaEgreso > e.FechaIngreso)
-                {
+                {//TODO: S_EmpleadoMedico_UpdateEgresado
                     query = string.Format(" UPDATE Empleado SET Nombre='{0}', Apellido = '{1}', DNI = '{2}', Puesto='{3}',Salario='{4}',FechaIngreso='{5}',FechaEgreso='{6}',Antiguedad='{7}' where IdEmpleado='{8}'",
                         e.Nombre, e.Apellido, e.DNI, e.Puesto, e.Salario, e.FechaIngreso, e.FechaEgreso, e.Antiguedad, e.Codigo);
                     return oDatos.Escribir(query);
                 }
                 else
-                {
+                {//TODO:S_EmpleadoMedico_UpdateNOEgresado
                     query = string.Format(" UPDATE Empleado SET Nombre='{0}', Apellido = '{1}', DNI = '{2}', Puesto='{3}',Salario='{4}',FechaIngreso='{5}',Antiguedad='{6}' where IdEmpleado='{7}'",
                                        e.Nombre, e.Apellido, e.DNI, e.Puesto, e.Salario, e.FechaIngreso, e.Antiguedad, e.Codigo);
                     return oDatos.Escribir(query);
@@ -60,6 +61,7 @@ namespace Mapper
             }
         }
 
+        //TODO: S_Empleado_GuardarEnSucursal
         public bool GuardarEnSucursal(BESucursal sucursal, BEEmpleadoMedico empleado)
         {
             string query;

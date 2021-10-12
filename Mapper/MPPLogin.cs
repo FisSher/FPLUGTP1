@@ -29,12 +29,14 @@ namespace Mapper
 
         public bool ExisteUsuario(BELogin bELogin)
         {
+            //TODO: S_Usuario_ExisteUsuario
             oDatos = new Acceso();
             return oDatos.LeerEscalar($"Select count(Usuario) from Usuarios where Usuario = '{bELogin.Usuario}'");
         }
 
         public bool Guardar(BELogin Objeto)
         {
+            //TODO: S_Usuario_Guardar
             string query = $"Insert into Usuarios(Usuario,Password) values ('{Objeto.Usuario}','{Objeto.Passwd}')";
             if (ExisteUsuario(Objeto))
             {
@@ -47,7 +49,7 @@ namespace Mapper
         }
 
         public BELogin ListarObjeto(BELogin bELogin)
-        {
+        {//TODO:S_Usuario_ListarObjeto
             string consulta = string.Format("SELECT Usuario, Password FROM Usuarios WHERE  Usuario = '{0}' AND Password ='{1}'", bELogin.Usuario, bELogin.Passwd);
             DataTable tabla = oDatos.Leer(consulta);
             if (tabla.Rows.Count > 0)
