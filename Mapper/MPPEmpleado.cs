@@ -17,10 +17,10 @@ namespace Mapper
         public List<BEEmpleado> ListarTodo()
         {
             List<BEEmpleado> ListaEmpleados = new List<BEEmpleado>();
-            //TODO: Reemplazar
-            string query = "Select IdEmpleado, Nombre, Apellido, DNI, Puesto, Salario, Baja, FechaIngreso, FechaEgreso, Antiguedad, Lenguaje_Programacion from Empleado";
+            //SP: S_Empleado_ListarTodo
+            string query = "S_Empleado_ListarTodo";
 
-            DataTable tabla = oDatos.Leer(query);
+            DataTable tabla = oDatos.Leer(query,null);
             if (tabla.Rows.Count > 0)
             {
                 foreach (DataRow fila in tabla.Rows)

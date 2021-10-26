@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,14 +9,26 @@ namespace DAL
     public class Acceso
     {
         private readonly SqlConnection conexionSql = new SqlConnection(ConfigurationManager.ConnectionStrings["MiCadenaDeConexion"].ToString());
+        private SqlCommand sqlCommand;
 
-        //Traigo una lectura de tabla generica
-        public DataTable Leer(string Consulta_SQL)
+        //Ya tiene stored
+        public DataTable Leer(string Consulta_SQL, Hashtable hashdatos)
         {
+            conexionSql.Open();
             DataTable tabla = new DataTable();
+            sqlCommand = new SqlCommand(Consulta_SQL, conexionSql);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+
             try
             {
-                SqlDataAdapter DA = new SqlDataAdapter(Consulta_SQL, conexionSql);
+                SqlDataAdapter DA = new SqlDataAdapter(sqlCommand);
+                if ((hashdatos != null))
+                {
+                    foreach (string dato in hashdatos.Keys)
+                    {
+                        sqlCommand.Parameters.AddWithValue(dato, hashdatos[dato]);
+                    }
+                }
                 DA.Fill(tabla);
             }
             catch (SqlException)
@@ -31,12 +44,24 @@ namespace DAL
             return tabla;
         }
 
-        public DataSet Leer2(string Consulta_SQL)
+        //Ya tiene stored
+        public DataSet Leer2(string Consulta_SQL, Hashtable hashdatos)
         {
+            conexionSql.Open();
             DataSet DS = new DataSet();
+            sqlCommand = new SqlCommand(Consulta_SQL, conexionSql);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
             try
             {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Consulta_SQL, conexionSql);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
+                if ((hashdatos != null))
+                {
+                    foreach (string dato in hashdatos.Keys)
+                    {
+                        sqlCommand.Parameters.AddWithValue(dato, hashdatos[dato]);
+                    }
+                }
+
                 dataAdapter.Fill(DS);
             }
             catch (SqlException)
@@ -52,8 +77,8 @@ namespace DAL
             return DS;
         }
 
-        //Tengo que hacer acá el transaction
-        public bool Escribir(string Consulta_SQL)
+        //Ya tiene stored
+        public bool Escribir(string Consulta_SQL, Hashtable hashdatos)
         {
             conexionSql.Open();
             SqlTransaction sqlTransaction;
@@ -62,11 +87,18 @@ namespace DAL
 
             try
             {
-                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Connection = conexionSql;
                 sqlCommand.CommandText = Consulta_SQL;
                 sqlCommand.Transaction = sqlTransaction;
-                sqlCommand.ExecuteNonQuery(); 
+                if ((hashdatos != null))
+                {
+                    foreach (string dato in hashdatos.Keys)
+                    {
+                        sqlCommand.Parameters.AddWithValue(dato, hashdatos[dato]);
+                    }
+                }
+                sqlCommand.ExecuteNonQuery();
                 sqlTransaction.Commit();
                 return true;
             }
@@ -84,13 +116,21 @@ namespace DAL
             { conexionSql.Close(); }
         }
 
-        public bool LeerEscalar(string consulta)
+        //Ya tiene stored
+        public bool LeerEscalar(string consulta, Hashtable hashdatos)
         {
             conexionSql.Open();
             SqlCommand cmd = new SqlCommand(consulta, conexionSql);
-            cmd.CommandType = CommandType.Text;
+            cmd.CommandType = CommandType.StoredProcedure;
             try
             {
+                if ((hashdatos != null))
+                {
+                    foreach (string dato in hashdatos.Keys)
+                    {
+                        cmd.Parameters.AddWithValue(dato, hashdatos[dato]);
+                    }
+                }
                 int Respuesta = Convert.ToInt32(cmd.ExecuteScalar());
                 conexionSql.Close();
                 if (Respuesta > 0)

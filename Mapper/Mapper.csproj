@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MPPAmbulancia.cs" />
     <Compile Include="MPPEmpleado.cs" />
     <Compile Include="MPPEmpleadoIT.cs" />
     <Compile Include="MPPEmpleadoMedico.cs" />

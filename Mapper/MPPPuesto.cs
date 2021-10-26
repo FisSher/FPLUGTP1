@@ -2,6 +2,7 @@
 using BE;
 using DAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 
@@ -15,13 +16,15 @@ namespace Mapper
         }
 
         private Acceso oDatos;
+        Hashtable Hdatos;
 
         public bool Baja(BEPuesto Objeto)
-        {//TODO:S_Puesto_Baja
-            string query;
-            query = $"DELETE FROM Puesto where IdPuesto = '{Objeto.Codigo}'";
-            oDatos = new Acceso();
-            return oDatos.Escribir(query);
+        {//SP:S_Puesto_Baja
+ 
+            Hdatos = new Hashtable();
+            Hdatos.Add("@Cod", Objeto.Codigo);
+
+            return oDatos.Escribir("S_Puesto_Baja", Hdatos);
         }
 
         public bool BajaLogica(BEPuesto Objeto)
@@ -31,17 +34,22 @@ namespace Mapper
 
         public bool Guardar(BEPuesto puesto)
         {
-            string query;
+            string storedProcedure;
+            Hdatos = new Hashtable();
             if (puesto.Codigo == 0)
-            {//TODO: S_Puesto_Crear
-                query = $"Insert into Puesto(Nombre) values('{puesto.Nombre}')";
+            {//SP: S_Puesto_Crear
+                storedProcedure = "S_Puesto_Crear";
+                Hdatos.Add("@Nom", puesto.Nombre);
+
             }
             else
-            {//TODO: S_Puesto_Update
-                query = $"UPDATE Puesto SET Nombre='{puesto.Nombre}' where IdPuesto ='{puesto.Codigo}'";
+            {//SP: S_Puesto_Update
+                storedProcedure = "S_Puesto_Update";
+                Hdatos.Add("@Cod", puesto.Codigo);
+                Hdatos.Add("@Nom", puesto.Nombre);
             }
-            oDatos = new Acceso();
-            return oDatos.Escribir(query);
+
+            return oDatos.Escribir(storedProcedure,Hdatos);
         }
 
         public BEPuesto ListarObjeto(BEPuesto Objeto)
@@ -51,10 +59,11 @@ namespace Mapper
 
         public List<BEPuesto> ListarTodo()
         {
-            //TODO: S_Puesto_ListarTodo
+            //SP: S_Puesto_ListarTodo
             DataTable tabla;
-            oDatos = new Acceso();
-            tabla = oDatos.Leer("SELECT IdPuesto,Nombre FROM Puesto");
+            Hdatos = new Hashtable();
+
+            tabla = oDatos.Leer("S_Puesto_ListarTodo",null);
             List<BEPuesto> ListaPuestos = new List<BEPuesto>();
             if (tabla.Rows.Count > 0)
             {

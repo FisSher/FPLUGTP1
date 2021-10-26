@@ -2,6 +2,7 @@
 using BE;
 using DAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 
@@ -15,6 +16,7 @@ namespace Mapper
         }
 
         private Acceso oDatos;
+        private Hashtable Hdatos;
 
         public bool Baja(BELocalidad localidad)
         {
@@ -24,17 +26,21 @@ namespace Mapper
             }
             else
             {
-                //TODO: S_Localidad_Baja
-                string query = $"DELETE FROM Localidades where IdLocalidad = '{localidad.Codigo}'";
-                oDatos = new Acceso();
-                return oDatos.Escribir(query);
+                Hdatos = new Hashtable();
+                //sp: S_Localidad_Baja
+                string query = "S_Localidad_Baja";
+                Hdatos.Add("@Cod", localidad.Codigo);
+                return oDatos.Escribir(query,Hdatos);
             }
         }
 
         private bool ExisteSucursalAsociada(BELocalidad loc)
         {
-            oDatos = new Acceso();
-            return oDatos.LeerEscalar($"Select count(Localidad) from Sucursales where Localidad = '{loc.Codigo}'");
+            //SP: S_Localidad_SucAsociada
+            Hdatos = new Hashtable();
+            Hdatos.Add("@Cod", loc.Codigo);
+
+            return oDatos.LeerEscalar("S_Localidad_SucAsociada",Hdatos);
         }
 
         public bool BajaLogica(BELocalidad Objeto)
@@ -49,25 +55,30 @@ namespace Mapper
 
         public bool Guardar(BELocalidad Objeto)
         {
+            Hdatos = new Hashtable();
+            
             string consulta;
             if (Objeto.Codigo != 0)
-            {//TODO: S_Localidad_Update
-                consulta = string.Format("UPDATE Localidades SET Nombre = '{0}' where IdLocalidad = '{1}'", Objeto.Nombre, Objeto.Codigo);
+            {//sp: S_Localidad_Update
+                Hdatos.Add("@Cod", Objeto.Codigo);
+                Hdatos.Add("@Nom", Objeto.Nombre);
+                consulta = "S_Localidad_Update";
             }
             else
-            {//TODO: S_Localidad_Crear
-                consulta = $"Insert into Localidades(Nombre) VALUES('{Objeto.Nombre}')";
+            {//sp: S_Localidad_Crear
+                Hdatos.Add("@Nom", Objeto.Nombre);
+                consulta = "S_Localidad_Crear";
             }
             oDatos = new Acceso();
-            return oDatos.Escribir(consulta);
+            return oDatos.Escribir(consulta,Hdatos);
         }
 
         public List<BELocalidad> ListarTodo()
         {
-            //TODO: S_Localidad_ListarTodo
+            //sp: S_Localidad_ListarTodo
             DataTable tabla;
             oDatos = new Acceso();
-            tabla = oDatos.Leer("Select IdLocalidad,Nombre From Localidades");
+            tabla = oDatos.Leer("S_Localidad_ListarTodo",null);
             List<BELocalidad> ListaLocalidades = new List<BELocalidad>();
 
             if (tabla.Rows.Count > 0)

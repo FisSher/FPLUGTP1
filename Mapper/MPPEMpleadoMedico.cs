@@ -2,6 +2,7 @@
 using BE;
 using DAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 
@@ -13,6 +14,7 @@ namespace Mapper
         {
             oDatos = new Acceso();
         }
+        private Hashtable Hdatos;
 
         private Acceso oDatos;
 
@@ -22,49 +24,93 @@ namespace Mapper
         }
 
         public bool BajaLogica(BEEmpleadoMedico e)
-        {//TODO: S_Empleado_BajaLogica
-            string query = $"UPDATE Empleado SET Baja=1, FechaEgreso = '{DateTime.Now.ToShortDateString()}' where IdEmpleado='{e.Codigo}'";
-            return oDatos.Escribir(query);
+        {//sp: S_Empleado_BajaLogica
+            Hdatos = new Hashtable();
+            Hdatos.Add("@FechaE", DateTime.Now.ToShortDateString());
+            Hdatos.Add("@Cod", e.Codigo);
+            string query = "S_Empleado_BajaLogica";
+            return oDatos.Escribir(query,Hdatos);
         }
 
         public bool Guardar(BEEmpleadoMedico e)
         {
+            Hdatos = new Hashtable();
             string query;
             if (e.Codigo == 0)
             {
                 if (e.FechaEgreso > e.FechaIngreso)
-                {//TODO: S_EmpleadoMedico_Crear
-                    query = $"Insert into Empleado(Nombre,Apellido,DNI,Puesto,Salario,Baja,FechaIngreso,Antiguedad,FechaEgreso) values ('{e.Nombre}','{e.Apellido}','{e.DNI}','{e.Puesto}','{e.Salario}','{e.Baja}','{e.FechaIngreso}','{e.Antiguedad}','{e.FechaEgreso}')";
-                    return oDatos.Escribir(query);
+                {
+                    //sp: S_EmpleadoMedico_Crear
+                    Hdatos.Add("@Nom", e.Nombre);
+                    Hdatos.Add("@Ape", e.Apellido);
+                    Hdatos.Add("@Dni", e.DNI);
+                    Hdatos.Add("@Puesto", e.Puesto);
+                    Hdatos.Add("@Salario", e.Salario);
+                    Hdatos.Add("@Baja", e.Baja);
+                    Hdatos.Add("@FechaI", e.FechaIngreso);
+                    Hdatos.Add("@FechaE", e.FechaEgreso);
+                    Hdatos.Add("@Ant", e.Antiguedad);
+
+                    query = "S_EmpleadoMedico_Crear";
+                    return oDatos.Escribir(query,Hdatos);
                 }
                 else
                 {
-                    //TODO: S_EmpleadoMedico_CrearNOEgresado
-                    query = $"Insert into Empleado(Nombre,Apellido,DNI,Puesto,Salario,Baja,FechaIngreso,Antiguedad) values ('{e.Nombre}','{e.Apellido}','{e.DNI}','{e.Puesto}','{e.Salario}','{e.Baja}','{e.FechaIngreso}','{e.Antiguedad}')";
-                    return oDatos.Escribir(query);
+                    //sp: S_EmpleadoMedico_CrearNOEgresado
+                    Hdatos.Add("@Nom", e.Nombre);
+                    Hdatos.Add("@Ape", e.Apellido);
+                    Hdatos.Add("@Dni", e.DNI);
+                    Hdatos.Add("@Puesto", e.Puesto);
+                    Hdatos.Add("@Salario", e.Salario);
+                    Hdatos.Add("@Baja", e.Baja);
+                    Hdatos.Add("@FechaI", e.FechaIngreso);
+                    Hdatos.Add("@Ant", e.Antiguedad);
+                    query = "S_EmpleadoMedico_CrearNOEgresado";
+                    return oDatos.Escribir(query,Hdatos);
                 }
             }
             else
             {
                 if (e.FechaEgreso > e.FechaIngreso)
-                {//TODO: S_EmpleadoMedico_UpdateEgresado
-                    query = string.Format(" UPDATE Empleado SET Nombre='{0}', Apellido = '{1}', DNI = '{2}', Puesto='{3}',Salario='{4}',FechaIngreso='{5}',FechaEgreso='{6}',Antiguedad='{7}' where IdEmpleado='{8}'",
-                        e.Nombre, e.Apellido, e.DNI, e.Puesto, e.Salario, e.FechaIngreso, e.FechaEgreso, e.Antiguedad, e.Codigo);
-                    return oDatos.Escribir(query);
+                {//sp: S_EmpleadoMedico_UpdateEgresado
+
+                    Hdatos.Add("@Nom", e.Nombre);
+                    Hdatos.Add("@Ape", e.Apellido);
+                    Hdatos.Add("@Dni", e.DNI);
+                    Hdatos.Add("@Puesto", e.Puesto);
+                    Hdatos.Add("@Salario", e.Salario);
+                    Hdatos.Add("@Baja", e.Baja);
+                    Hdatos.Add("@FechaI", e.FechaIngreso);
+                    Hdatos.Add("@FechaE", e.FechaEgreso);
+                    Hdatos.Add("@Ant", e.Antiguedad);
+                    Hdatos.Add("@Cod", e.Codigo);
+                    query = "S_EmpleadoMedico_UpdateEgresado";
+
+
+                    return oDatos.Escribir(query,Hdatos);
                 }
                 else
-                {//TODO:S_EmpleadoMedico_UpdateNOEgresado
-                    query = string.Format(" UPDATE Empleado SET Nombre='{0}', Apellido = '{1}', DNI = '{2}', Puesto='{3}',Salario='{4}',FechaIngreso='{5}',Antiguedad='{6}' where IdEmpleado='{7}'",
-                                       e.Nombre, e.Apellido, e.DNI, e.Puesto, e.Salario, e.FechaIngreso, e.Antiguedad, e.Codigo);
-                    return oDatos.Escribir(query);
+                {//sp: S_EmpleadoMedico_UpdateNOEgresado
+                    Hdatos.Add("@Nom", e.Nombre);
+                    Hdatos.Add("@Ape", e.Apellido);
+                    Hdatos.Add("@Dni", e.DNI);
+                    Hdatos.Add("@Puesto", e.Puesto);
+                    Hdatos.Add("@Salario", e.Salario);
+                    Hdatos.Add("@Baja", e.Baja);
+                    Hdatos.Add("@FechaI", e.FechaIngreso);
+                    Hdatos.Add("@Ant", e.Antiguedad);
+                    Hdatos.Add("@Cod", e.Codigo);
+                    query = "S_EmpleadoMedico_UpdateNOEgresado";
+                    return oDatos.Escribir(query,Hdatos);
                 }
             }
         }
 
-        //TODO: S_Empleado_GuardarEnSucursal
+        //sp: S_Empleado_GuardarEnSucursal
         public bool GuardarEnSucursal(BESucursal sucursal, BEEmpleadoMedico empleado)
         {
             string query;
+            Hdatos = new Hashtable();
             BEEmpleadoMedico empleadoBuscado = new BEEmpleadoMedico();
             empleadoBuscado = ListarObjeto(empleado);
             if (empleadoBuscado.Codigo == 0)
@@ -73,8 +119,10 @@ namespace Mapper
             }
             else
             {
-                query = $"Insert into Empleado_Sucursal(IdEmpleado,IdSucursal) values ({empleado.Codigo},{sucursal.Codigo})";
-                return oDatos.Escribir(query);
+                Hdatos.Add("@CodEmpl", empleado.Codigo);
+                Hdatos.Add("@CodSuc",sucursal.Codigo);
+                query = "S_Empleado_GuardarEnSucursal";
+                return oDatos.Escribir(query,Hdatos);
             }
         }
 
@@ -83,11 +131,12 @@ namespace Mapper
             throw new NotImplementedException();
         }
 
+        //SP: S_Empleado_ListarTodo
         public List<BEEmpleadoMedico> ListarTodo()
         {
             DataTable tabla;
             oDatos = new Acceso();
-            tabla = oDatos.Leer("Select IdEmpleado,Nombre,Apellido,DNI,Puesto,Salario,Baja,FechaIngreso,FechaEgreso,Antiguedad,Lenguaje_Programacion from Empleado");
+            tabla = oDatos.Leer("S_Empleado_ListarTodo",null);
             List<BEEmpleadoMedico> LEmpleadosMedico = new List<BEEmpleadoMedico>();
 
             if (tabla.Rows.Count > 0)

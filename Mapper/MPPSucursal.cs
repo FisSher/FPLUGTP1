@@ -2,6 +2,7 @@
 using BE;
 using DAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 
@@ -15,13 +16,17 @@ namespace Mapper
         }
 
         private Acceso oDatos;
+        Hashtable Hdatos;
+
 
         public bool Baja(BESucursal suc)
         {
-            //TODO: S_Sucursal_Baja
-            string query = $"DELETE FROM Sucursales where IdSucursal = '{suc.Codigo}'";
-            oDatos = new Acceso();
-            return oDatos.Escribir(query);
+            //SP: S_Sucursal_Baja
+            Hdatos = new Hashtable();
+            Hdatos.Add("@Cod",suc.Codigo);
+            string query = "S_Sucursal_Baja";
+
+            return oDatos.Escribir(query, Hdatos);
         }
 
         public bool BajaLogica(BESucursal Objeto)
@@ -31,33 +36,45 @@ namespace Mapper
 
         public bool Guardar(BESucursal sucursal)
         {
+            Hdatos = new Hashtable();
             string query;
             if (sucursal.Codigo == 0)
-            {//TODO: S_Sucursal_Crear
-                query = $"Insert into Sucursales (NombreSuc,Localidad) values ('{sucursal.Nombre}','{sucursal.Localidad.Codigo}')";
+            {//SP: S_Sucursal_Crear
+                query = "S_Sucursal_Crear";
+                Hdatos.Add("@Nom", sucursal.Nombre);
+                Hdatos.Add("@Cod", sucursal.Localidad.Codigo);
+
             }
             else
-            {//TODO:S_Sucursal_Update
-                query = $"UPDATE Sucursales SET NombreSuc = '{sucursal.Nombre}', Localidad = '{sucursal.Localidad.Codigo}' where IdSucursal = '{sucursal.Codigo}'";
+            {//SP:S_Sucursal_Update
+                query = "S_Sucursal_Update";
+                Hdatos.Add("@Nom", sucursal.Nombre);
+                Hdatos.Add("@CodLoc", sucursal.Localidad.Codigo);
+                Hdatos.Add("@Cod", sucursal.Codigo);
             }
             oDatos = new Acceso();
-            return oDatos.Escribir(query);
+            return oDatos.Escribir(query,Hdatos);
         }
 
         public bool Quitar_Sucursal_Empleado(BESucursal bESucursal, BEEmpleado empleado)
         {
-            //TODO: S_Sucursal_QuitarEmpleado
-            string query = string.Format(" Delete from Empleado_Sucursal where NumSucursal = {0}  and NumEmpleado ={1}", bESucursal.Codigo, empleado.Codigo);
-            oDatos = new Acceso();
-            return oDatos.Escribir(query);
+            //SP: S_Sucursal_QuitarEmpleado
+            string query = "S_Sucursal_QuitarEmpleado";
+            Hdatos = new Hashtable();
+            Hdatos.Add("@CodEmpleado", empleado.Codigo);
+            Hdatos.Add("@Cod", bESucursal.Codigo);
+
+            return oDatos.Escribir(query,Hdatos);
         }
 
         public bool Sucursal_Empleado(BESucursal sucursal, BEEmpleado empleado)
         {
-            //TODO: S_Sucursal_Empleado
-            string query = string.Format(@"Insert into Empleado_Sucursal (NumSucursal,NumEmpleado) values ('{0}','{1}')", sucursal.Codigo, empleado.Codigo);
-            oDatos = new Acceso();
-            return oDatos.Escribir(query);
+            //sp: S_Sucursal_Empleado
+            Hdatos = new Hashtable();
+            string query = "S_Sucursal_Empleado";
+            Hdatos.Add("@CodEmpleado", empleado.Codigo);
+            Hdatos.Add("@Cod", sucursal.Codigo);
+            return oDatos.Escribir(query,Hdatos);
         }
 
         public BESucursal ListarObjeto(BESucursal Objeto)
@@ -67,11 +84,13 @@ namespace Mapper
 
         public List<BESucursal> ListarTodo()
         {
+            Hdatos = new Hashtable();
+
             DataSet dataSet;
             oDatos = new Acceso();
-            //TODO: S_Sucursal_ListarTodo
-            string query = $"Select Sucursales.IdSucursal, Sucursales.NombreSuc, Localidades.IdLocalidad,Localidades.Nombre from Sucursales,Localidades where Sucursales.Localidad = Localidades.IdLocalidad";
-            dataSet = oDatos.Leer2(query);
+            //sp: S_Sucursal_ListarTodo
+            string query = "S_Sucursal_ListarTodo";
+            dataSet = oDatos.Leer2(query,null);
             List<BESucursal> ListaSucursales = new List<BESucursal>();
             if (dataSet.Tables[0].Rows.Count > 0)
             {
@@ -89,16 +108,15 @@ namespace Mapper
                     oSucursal.Localidad = LocalidadTabla;
 
                     //Segunda consulta acá estoy hasta las manos
-                    //Cada vez que reformatee esta consulta el contador va a aumentar:   > 10 < 
+                    //Cada vez que reformatee esta consulta el contador va a aumentar:   > 12< 
 
-                    //TODO: S_Sucursal_ListarTodoParteDos
-                    string query2 = string.Format(@"Select IdEmpleado,Empleado.Nombre as Nombre,Empleado.Apellido as Apellido,DNI,Puesto,Salario,Baja,FechaIngreso,FechaEgreso,Antiguedad,Lenguaje_Programacion
-                                        from Empleado,Empleado_Sucursal
-                                        where Empleado.IdEmpleado = Empleado_Sucursal.NumEmpleado
-                                        and Empleado_Sucursal.NumSucursal ={0}", oSucursal.Codigo);
+                    //sp: S_Sucursal_ListarTodoParteDos
+                    string query2 = "S_Sucursal_ListarTodoParteDos";
+                    Hdatos.Add("@Cod", oSucursal.Codigo);
                     Acceso oDatos2 = new Acceso();
                     DataSet Ds2 = new DataSet();
-                    Ds2 = oDatos.Leer2(query2);
+                    Ds2 = oDatos.Leer2(query2,Hdatos);
+                    Hdatos.Clear();
                     List<BEEmpleado> ListaEmpleados = new List<BEEmpleado>();
                     if (Ds2.Tables[0].Rows.Count > 0)
                     {

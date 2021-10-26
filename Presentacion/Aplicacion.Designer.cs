@@ -38,6 +38,7 @@ namespace Presentacion
             this.sucursalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.localidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ambulanciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,7 +75,8 @@ namespace Presentacion
             this.nuevoEmpleadoToolStripMenuItem,
             this.puestosToolStripMenuItem,
             this.sucursalesToolStripMenuItem,
-            this.localidadesToolStripMenuItem});
+            this.localidadesToolStripMenuItem,
+            this.ambulanciasToolStripMenuItem});
             this.gestionToolStripMenuItem.Name = "gestionToolStripMenuItem";
             this.gestionToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.gestionToolStripMenuItem.Text = "Gestion";
@@ -82,28 +84,28 @@ namespace Presentacion
             // nuevoEmpleadoToolStripMenuItem
             // 
             this.nuevoEmpleadoToolStripMenuItem.Name = "nuevoEmpleadoToolStripMenuItem";
-            this.nuevoEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.nuevoEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nuevoEmpleadoToolStripMenuItem.Text = "Empleados";
             this.nuevoEmpleadoToolStripMenuItem.Click += new System.EventHandler(this.nuevoEmpleadoToolStripMenuItem_Click);
             // 
             // puestosToolStripMenuItem
             // 
             this.puestosToolStripMenuItem.Name = "puestosToolStripMenuItem";
-            this.puestosToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.puestosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.puestosToolStripMenuItem.Text = "Puestos";
             this.puestosToolStripMenuItem.Click += new System.EventHandler(this.puestosToolStripMenuItem_Click);
             // 
             // sucursalesToolStripMenuItem
             // 
             this.sucursalesToolStripMenuItem.Name = "sucursalesToolStripMenuItem";
-            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sucursalesToolStripMenuItem.Text = "Sucursales";
             this.sucursalesToolStripMenuItem.Click += new System.EventHandler(this.sucursalesToolStripMenuItem_Click);
             // 
             // localidadesToolStripMenuItem
             // 
             this.localidadesToolStripMenuItem.Name = "localidadesToolStripMenuItem";
-            this.localidadesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.localidadesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.localidadesToolStripMenuItem.Text = "Localidades";
             this.localidadesToolStripMenuItem.Click += new System.EventHandler(this.localidadesToolStripMenuItem_Click);
             // 
@@ -113,6 +115,13 @@ namespace Presentacion
             this.informesToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.informesToolStripMenuItem.Text = "Informes";
             this.informesToolStripMenuItem.Click += new System.EventHandler(this.informesToolStripMenuItem_Click);
+            // 
+            // ambulanciasToolStripMenuItem
+            // 
+            this.ambulanciasToolStripMenuItem.Name = "ambulanciasToolStripMenuItem";
+            this.ambulanciasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ambulanciasToolStripMenuItem.Text = "Ambulancias";
+            this.ambulanciasToolStripMenuItem.Click += new System.EventHandler(this.ambulanciasToolStripMenuItem_Click);
             // 
             // Aplicacion
             // 
@@ -143,5 +152,6 @@ namespace Presentacion
         private System.Windows.Forms.ToolStripMenuItem sucursalesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem localidadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem informesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ambulanciasToolStripMenuItem;
     }
 }

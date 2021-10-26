@@ -49,5 +49,12 @@ namespace Presentacion
             vInformes.MdiParent = this;
             vInformes.Show();
         }
+
+        private void ambulanciasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ambulancia vAmbulancia = new Ambulancia();
+            vAmbulancia.MdiParent = this;
+            vAmbulancia.Show();
+        }
     }
 }

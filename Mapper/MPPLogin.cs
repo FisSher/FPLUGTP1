@@ -2,6 +2,7 @@
 using BE;
 using DAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 
@@ -16,7 +17,7 @@ namespace Mapper
         }
 
         private Acceso oDatos;
-
+        Hashtable Hdatos;
         public bool Baja(BELogin Objeto)
         {
             throw new NotImplementedException();
@@ -29,29 +30,38 @@ namespace Mapper
 
         public bool ExisteUsuario(BELogin bELogin)
         {
-            //TODO: S_Usuario_ExisteUsuario
-            oDatos = new Acceso();
-            return oDatos.LeerEscalar($"Select count(Usuario) from Usuarios where Usuario = '{bELogin.Usuario}'");
+            //SP: S_Usuario_ExisteUsuario
+            Hdatos = new Hashtable();
+            Hdatos.Add("@Nom", bELogin.Usuario);
+            
+            
+            return oDatos.LeerEscalar("S_Usuario_ExisteUsuario", Hdatos);
         }
 
         public bool Guardar(BELogin Objeto)
         {
-            //TODO: S_Usuario_Guardar
-            string query = $"Insert into Usuarios(Usuario,Password) values ('{Objeto.Usuario}','{Objeto.Passwd}')";
+            //SP: S_Usuario_Guardar
+            Hdatos = new Hashtable();
+            Hdatos.Add("@Nom", Objeto.Usuario);
+            Hdatos.Add("@Pas", Objeto.Passwd);
+
             if (ExisteUsuario(Objeto))
             {
                 return false;
             }
             else
             {
-                return oDatos.Escribir(query);
+                return oDatos.Escribir("S_Usuario_Guardar", Hdatos);
             }
         }
 
         public BELogin ListarObjeto(BELogin bELogin)
-        {//TODO:S_Usuario_ListarObjeto
-            string consulta = string.Format("SELECT Usuario, Password FROM Usuarios WHERE  Usuario = '{0}' AND Password ='{1}'", bELogin.Usuario, bELogin.Passwd);
-            DataTable tabla = oDatos.Leer(consulta);
+        {// SP: S_Usuario_ListarObjeto
+
+            Hdatos = new Hashtable();
+            Hdatos.Add("@Nom", bELogin.Usuario);
+            Hdatos.Add("@Pas", bELogin.Passwd);
+            DataTable tabla = oDatos.Leer("S_Usuario_ListarObjeto", Hdatos);
             if (tabla.Rows.Count > 0)
             {
                 foreach (DataRow item in tabla.Rows)

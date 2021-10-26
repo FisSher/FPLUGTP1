@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ambulancia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ambulancia.Designer.cs">
+      <DependentUpon>Ambulancia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Aplicacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="Sucursal.Designer.cs">
       <DependentUpon>Sucursal.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Ambulancia.resx">
+      <DependentUpon>Ambulancia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Aplicacion.resx">
       <DependentUpon>Aplicacion.cs</DependentUpon>
     </EmbeddedResource>
