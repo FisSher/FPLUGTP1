@@ -16,5 +16,10 @@ Las localidades tienen solo el ID y el nombre en una tabla aparte.
 Se requiere el ABM de todas las clases y que los cambios persistan en una base de datos. 
 Para mantener el seguimiento de los recursos, la baja de los empleados es lógica.
 
+Se requiere tener una lectura de ambulancias donde se tenga codigo de la ambulancia,
+si está en servicio, si es del tipo que atiende emergencias y la cantidad de pasajeros.
+
+Debe guardarse en un XML y se debe poder agregar, borrar y buscar por todos sus campos.
+
 
 

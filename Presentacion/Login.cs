@@ -19,39 +19,56 @@ namespace Presentacion
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            bELogin.Usuario = textBoxUsuario.Text;
-            bELogin.Passwd = textBoxContra.Text;
-            if (bLogin.ListarObjeto(bELogin) != null)
+            ValidacionesRegex validacion = new ValidacionesRegex();
+            if (validacion.ValidarAlfanumerico(textBoxUsuario.Text) && validacion.ValidarAlfanumerico(textBoxContra.Text))
             {
-                this.Hide();
-                Aplicacion oAplicacion = new Aplicacion();
-                oAplicacion.Show();
+                bELogin.Usuario = textBoxUsuario.Text;
+                bELogin.Passwd = textBoxContra.Text;
+                if (bLogin.ListarObjeto(bELogin) != null)
+                {
+                    this.Hide();
+                    Aplicacion oAplicacion = new Aplicacion();
+                    oAplicacion.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Error de login");
+                }
             }
             else
             {
-                MessageBox.Show("Error de login");
+                MessageBox.Show("Solo caracteres alfanumericos permitidos", "Error");
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            bELogin.Usuario = textBoxUsuario.Text;
-            bELogin.Passwd = textBoxContra.Text;
-            try
+            ValidacionesRegex validacion = new ValidacionesRegex();
+            if (validacion.ValidarAlfanumerico(textBoxUsuario.Text) && validacion.ValidarAlfanumerico(textBoxContra.Text))
             {
-                bool exito = bLogin.Guardar(bELogin);
-                if (!exito)
+                try
+
                 {
-                    MessageBox.Show("El usuario ya existe");
+                    bELogin.Usuario = textBoxUsuario.Text;
+                    bELogin.Passwd = textBoxContra.Text;
+                    bool exito = bLogin.Guardar(bELogin);
+                    if (!exito)
+                    {
+                        MessageBox.Show("El usuario ya existe");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Registrado con exito");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Registrado con exito");
+                    MessageBox.Show(ex.Message);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Solo caracteres alfanumericos permitidos", "Error");
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace BE
 {
-    public class BEEAmbulancia : Entidad
+    public class BEEAmbulancia 
     {
         public int NumAmbulancia { get; set; }
         public bool EnServicio { get; set; }

@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Negocio
 {
-    public class BLLAmbulancia : IGestor<BEEAmbulancia>
+    public class BLLAmbulancia 
     {
         public List<BEEAmbulancia> CargarXML()
         {
@@ -19,7 +19,7 @@ namespace Negocio
                                EnServicio = ambulancia.Element("Servicio").Value.ToString().Trim().ToLower() == "si",
                                CantPasajeros = Convert.ToInt32(ambulancia.Element("Pasajeros").Value.ToString().Trim())
                            };
-            List<BEEAmbulancia> LAmbulancias = consulta.ToList<BEEAmbulancia>();
+            List<BEEAmbulancia> LAmbulancias = consulta.ToList();
 
             return LAmbulancias;
         }
@@ -87,33 +87,6 @@ namespace Negocio
             return LAmbulancias;
         }
 
-        #region unused
 
-        public bool Baja(BEEAmbulancia Objeto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool BajaLogica(BEEAmbulancia Objeto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Guardar(BEEAmbulancia Objeto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public BEEAmbulancia ListarObjeto(BEEAmbulancia Objeto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<BEEAmbulancia> ListarTodo()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion unused
     }
 }

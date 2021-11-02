@@ -8,7 +8,7 @@ namespace Presentacion
     public partial class Ambulancia : Form
     {
         private BLLAmbulancia BLLAmbulancia;
-        private BEEAmbulancia BEEAmbulancia;
+        private BEEAmbulancia oBEEAmbulancia;
 
         public Ambulancia()
         {
@@ -34,7 +34,6 @@ namespace Presentacion
                 dataGridView1.Columns["EnServicio"].DisplayIndex = 2;
                 dataGridView1.Columns["EnServicio"].HeaderText = "En servicio";
                 dataGridView1.Columns["Emergencia"].DisplayIndex = 3;
-                dataGridView1.Columns["Codigo"].Visible = false;
                 dataGridView1.AutoResizeColumns();
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 dataGridView1.ReadOnly = true;
@@ -48,6 +47,8 @@ namespace Presentacion
         private void button2_Click(object sender, EventArgs e)
         {
             string tipoBusqueda = comboBox1.Text;
+            ValidacionesRegex validaciones = new ValidacionesRegex();
+
             try
             {
                 switch (tipoBusqueda)
@@ -63,33 +64,31 @@ namespace Presentacion
                         break;
 
                     case "Codigo":
-                        if (string.IsNullOrEmpty(textBoxBusq.Text))
-                        {
-                            MessageBox.Show("Complete metodo de busqueda");
-                        }
-                        else
+
+                        if (validaciones.ValidarSoloNumero(textBoxBusq.Text))
                         {
                             string codigo = textBoxBusq.Text;
                             dataGridView1.DataSource = null;
                             dataGridView1.DataSource = BLLAmbulancia.BuscarXML("Numero", textBoxBusq.Text);
                         }
-
+                        else
+                        {
+                            MessageBox.Show("Por favor, ingrese un número en textbox buscar", "Error!");
+                        }
                         break;
 
                     case "Pasajeros":
-                        if (string.IsNullOrEmpty(textBoxBusq.Text))
-                        {
-                            MessageBox.Show("Complete metodo de busqueda");
-                        }
-                        else
+                        if (validaciones.ValidarSoloNumero(textBoxBusq.Text))
                         {
                             string pasajeros = textBoxBusq.Text;
                             dataGridView1.DataSource = null;
                             dataGridView1.DataSource = BLLAmbulancia.BuscarXML("Pasajeros", textBoxBusq.Text);
                         }
-
+                        else
+                        {
+                            MessageBox.Show("Por favor, ingrese un número en textbox buscar", "Error!");
+                        }
                         break;
-
                     default:
                         MessageBox.Show("Seleccione metodo de busqueda");
                         break;
@@ -103,19 +102,28 @@ namespace Presentacion
 
         private void buttonAgregar_Click(object sender, EventArgs e)
         {
-            BEEAmbulancia = new BEEAmbulancia(
-                BEEAmbulancia.NumAmbulancia = Convert.ToInt32(textBoxCod.Text),
-                checkBoxServicio.Checked,
-                checkBoxEmergencia.Checked,
-                Convert.ToInt32(textBoxPasajeros.Text)
-                );
-            BLLAmbulancia.AgregarXML(BEEAmbulancia);
+            ValidacionesRegex validaciones = new ValidacionesRegex();
+            if (validaciones.ValidarSoloNumero(textBoxCod.Text) && validaciones.ValidarSoloNumero(textBoxPasajeros.Text))
+            {
+                oBEEAmbulancia = new BEEAmbulancia(
+                              Convert.ToInt32(textBoxCod.Text),
+                              checkBoxServicio.Checked,
+                              checkBoxEmergencia.Checked,
+                              Convert.ToInt32(textBoxPasajeros.Text)
+                              );
+                BLLAmbulancia.AgregarXML(oBEEAmbulancia);
+                CargarGrilla();
+            }
+            else
+            {
+                MessageBox.Show("El código y pasajeros sólo admite números", "Error!");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            BEEAmbulancia = (BEEAmbulancia)dataGridView1.CurrentRow.DataBoundItem;
-            BLLAmbulancia.BorrarXML(BEEAmbulancia.NumAmbulancia.ToString());
+            oBEEAmbulancia = (BEEAmbulancia)dataGridView1.CurrentRow.DataBoundItem;
+            BLLAmbulancia.BorrarXML(oBEEAmbulancia.NumAmbulancia.ToString());
             MessageBox.Show("Eliminado.");
             CargarGrilla();
         }
