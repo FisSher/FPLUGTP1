@@ -1,29 +1,30 @@
-﻿/*
- Esta clase quedó como histórico del trabajo práctico. 
-Se migró su funcionalidad a un control de usuario (LoginUC y LoginUCForm) por requerimientos del TP.
- */
-
-
-
-
-
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using BE;
 using Negocio;
-using System;
-using System.Windows.Forms;
 
 namespace Presentacion
 {
-    public partial class Login : Form
+    public partial class LoginUC : UserControl
     {
+
+
         private BELogin bELogin;
         private BLLogin bLogin;
-
-        public Login()
+        public LoginUC()
         {
-            InitializeComponent();
-            bELogin = new BELogin();
-            bLogin = new BLLogin();
+            
+                InitializeComponent();
+                bELogin = new BELogin();
+                bLogin = new BLLogin();
+            
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -79,6 +80,11 @@ namespace Presentacion
             {
                 MessageBox.Show("Solo caracteres alfanumericos permitidos", "Error");
             }
+        }
+
+        private void LoginUC_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

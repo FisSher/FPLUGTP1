@@ -21,5 +21,7 @@ si está en servicio, si es del tipo que atiende emergencias y la cantidad de pas
 
 Debe guardarse en un XML y se debe poder agregar, borrar y buscar por todos sus campos.
 
+Se requiere mostrar informes de distribución de salarios y empleados activos vs dados de baja
+
 
 
